@@ -1,0 +1,55 @@
+*{
+  font-family: 'Montserrat', serif;
+}
+.section{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 2px solid #d4ddd6;
+  //#198aeb
+}
+.comments{
+  max-width: 90%;
+  padding-bottom: 145%;
+  height: 0;
+}
+@media screen and (max-width: 767px) {
+  .comments {
+    padding-bottom: 80%;
+  }
+  .section{
+    margin-top: 1rem;
+  }
+}
+.comment{
+  border-radius: 5px;
+  //background-color: rgba(104, 57, 182, 0.3);
+  width: max-content;
+  max-width: 156px;
+  height: auto;
+}
+.author{
+  color: #bec7c0;
+  font: small-caps bold 1rem 'Montserrat';
+}
+.content{
+  color: #000000;
+  word-wrap: break-word;
+  max-width: 156px;
+  height: auto;
+  font: 1rem 'Montserrat';
+  font-weight: 300
+}
+.submit{
+  cursor: pointer;
+  color: rgba(25, 139, 236, 0.51);
+  font: bold 2rem "Arial Narrow, sans-serif";
+  &:hover{
+    transform: scale(1.1);
+  }
+  &:active{
+    transform: scale(.9);
+  }
+}
+

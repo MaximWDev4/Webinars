@@ -1,0 +1,45 @@
+<div class="contactus container-fluid">
+  <div class="us d-flex justify-content-center">
+    <div class="contactcol col-md-12 col-lg-5">
+      <h3 class="h3contactus">Укажите имя и почту на которую прийдет ссылка:</h3>
+      <form class="contactform" [formGroup]="contact" method="post">
+        <input *ngIf="name"
+               class="form-control inputformname"
+               type="text" formControlName="Name"
+               name="Name" placeholder="Имя и Фамилмия"
+               [patterns]="customPatterns"
+               mask="1*">
+        <input *ngIf="phone"
+               type="text"
+               id="PhoneNom"
+               (focusout)="PHONE_MASK = (contact.get('phone').value !== '') ? '0(000) 000-00-00' : ''"
+               (focusin)="PHONE_MASK = '0(000) 000-00-00'"
+               class="form-control inputform text-uppercase"
+               placeholder="Телефон для связи с вами"
+               formControlName="phone"
+               [showMaskTyped]="true"
+               [mask]="PHONE_MASK"
+               [prefix]="'+'"
+               [ngClass]="{'error': contact.get('phone').invalid && contact.get('phone').touched }">
+        <input *ngIf="email"
+               class="form-control inputform "
+               type="text" formControlName="Email"
+               name="Email" placeholder="E-mail">
+        <!--         production   <re-captcha formControlName="captcha" siteKey="6Leayv8UAAAAAPeHN2-1jFfdMF0urMGnGOew4Y1Q"></re-captcha>-->
+        <button class="contactbutton " (click)="submit()" [disabled]="contact.invalid" type="submit" name="buttonblock">
+          <b>Получить ссылку</b>
+        </button>
+      </form>
+    </div>
+  </div>
+
+</div>
+<div class="modal-overlay" *ngIf="showModal">
+  <div class="modal1">
+    <span class="cross" (click)="close()"> </span>
+    Ваша личная ссылка:
+    <a [href]="modalHref">
+     {{modalHref}}
+    </a>
+  </div>
+</div>

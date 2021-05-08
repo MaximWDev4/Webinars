@@ -1,0 +1,30 @@
+ngb-carousel{
+  height: 100vh;
+}
+.bg {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #1976d2;
+  height: 100vh;
+  position: relative;
+  z-index: -1;
+}
+
+.carousel-caption{
+  position: absolute;
+  right: 15%;
+  left: 15%;
+  top: 30px;
+  bottom: 0;
+  z-index: 10;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 70%;
+  color: #46465f;
+  text-align: center;
+  transition: all .15s ease;
+}

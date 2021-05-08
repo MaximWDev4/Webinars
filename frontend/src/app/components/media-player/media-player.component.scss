@@ -1,0 +1,64 @@
+ youtube-player {
+  display: block;
+  position: relative;
+  top:-100vw;
+  height: 200vw;
+  margin-top: -28.125%;
+}
+
+ ::ng-deep youtube-player iframe{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.wrapper {
+  overflow: hidden;
+  padding-top: 56.25%;
+  height: 0;
+  max-width: 100%;
+  background-color: #e4e4e4;
+}
+ mat-progress-bar{
+   height: 7px;
+   border-radius: 2px;
+ }
+.progress-bar-container{
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+ .play-pause-btn{
+   width: max-content;
+   background-color: #00000000;
+   border: none;
+   color: #46465f;
+   font: small-caps bold 1rem 'Montserrat';
+ }
+ .sound{
+   width: 22%;
+ }
+ @media screen and (max-width: 1024px) {
+   .sound{
+       width: 40%;
+     }
+ }
+ .play{
+   display: block;
+   margin-left: 40%;
+   width: 0;
+   height: 0;
+   border: .5rem solid transparent;
+   border-left: solid .5rem #46465f;
+ }
+ .time{
+   padding: 0 5px;
+   min-width: max-content;
+ }
+ mat-progress-bar{
+   flex-shrink: 1;
+   flex-grow: 1;
+ }

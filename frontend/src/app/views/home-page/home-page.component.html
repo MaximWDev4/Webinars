@@ -1,0 +1,16 @@
+<app-navbar [elements]="navBarElements"></app-navbar>
+
+<app-slider id="2" [slides]="slides" [showNavigation]="true">
+
+</app-slider>
+<p *ngIf="webinar$ | async as webinar ">
+  >Content{{webinar.name}}<
+</p>
+
+<app-spiker [spiker]="spikier"></app-spiker>
+
+<!--<app-profit></app-profit>-->
+
+<app-programm [steps]="program"></app-programm>
+
+<app-form id="3" [email]="true" [name]="true"></app-form>

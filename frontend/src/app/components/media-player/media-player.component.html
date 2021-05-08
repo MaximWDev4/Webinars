@@ -1,0 +1,39 @@
+<div class="wrapper">
+<youtube-player
+  [videoId]="'DjdSxGBp5U8'"
+  (ready)="playerInit($event)"
+  [playerVars]="playerVars"
+></youtube-player>
+</div>
+<div class="controls" *ngIf="player">
+  <div class="progress-bar-container">
+    <div class="sound d-flex align-items-center justify-content-between">
+      <img src="../../../assets/volume.jpg" class="mr-1" height="15" width="15" (click)="mute()"/>
+      <mat-progress-bar #sound (mousemove)="coordinates($event)"
+                        (mouseenter)="onEvent($event)"
+                        (mouseleave)="onEvent($event)"
+                        (click)="setVlolume(sound._elementRef.nativeElement.clientWidth, sound._elementRef.nativeElement)"
+                        [value]="soundPercent"
+      >
+      </mat-progress-bar>
+    </div>
+    <button type="button"
+        class="play-pause-btn"
+       (click)="playPauseVideo()">
+      <span class="play" *ngIf="!playerState"></span>
+      <span *ngIf="playerState">||</span>
+  </button>
+    <span class="time">{{currentTime}}</span>
+
+    <mat-progress-bar mode="determinate" [value]="timePercent"
+                      class="video-progress"
+                      #bar (mouseenter)="onEvent($event)"
+                      (mouseleave)="onEvent($event)"
+                      (mousemove)="coordinates($event)"
+                      (click)="selectTime(bar._elementRef.nativeElement.clientWidth, bar._elementRef.nativeElement)"
+    ></mat-progress-bar>
+    <span class="time">{{endTime}}</span>
+  </div>
+
+</div>
+

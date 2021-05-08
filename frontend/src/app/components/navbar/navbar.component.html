@@ -1,0 +1,25 @@
+<div class="navbar col-3 col-sm-2 col-md-2 col-lg-12">
+<div class="d-flex">
+  <a class="navbar-brand" href="#" [ngStyle]="{'color': global.textColor}">Navbar</a>
+
+  <div class="header hide-til-small">
+    <a class="target-burger" [ngClass]="{'toggled': pushed}" (click)="pushed = !pushed">
+      <ul class="buns">
+        <li class="bun"></li>
+        <li class="bun"></li>
+      </ul>
+      <!--buns-->
+    </a>
+
+  </div>
+</div>
+<nav class="navbar-expand navbar-light show-til-small">
+  <div class="navbarNav" [ngClass]="{'visible': pushed}">
+    <ul class="navbar-nav">
+      <li class="nav-item" *ngFor="let element of elements">
+        <a class="nav-link" [href]="element.href" [ngStyle]="{'color': global.textColor}"> {{element.name}}</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+</div>

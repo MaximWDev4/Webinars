@@ -1,0 +1,31 @@
+<div class="section" xmlns="http://www.w3.org/1999/html">
+  <cdk-virtual-scroll-viewport itemSize="50"  class="comments m-3">
+    <div class="comment mb-2 p-2" *cdkVirtualFor="let comment of comments">
+      <div class="author">{{comment.author}}</div>
+      <div class="content">{{comment.content}}</div>
+    </div>
+  </cdk-virtual-scroll-viewport>
+  <div class="d-flex align-items-baseline m-3">
+    <mat-form-field class="col-9">
+      <mat-label>Комментарий</mat-label>
+    <textarea matInput
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="5"
+              [(ngModel)]="commentInputValue"
+              (keydown.enter)="liveComment()">
+    </textarea>
+    </mat-form-field>
+    <span class="submit col-3" (click)="liveComment()"><img src="../../../assets/send-button.png" alt="=>" height="30" width="30"/>  </span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="messages">
+    <ul *ngIf="messages$ | async as messages">
+      <li *ngFor="let message of messages">
+        <strong>№{{ message.id }}:</strong> {{ message.text }}
+      </li>
+    </ul>
+  </div>
+</div>

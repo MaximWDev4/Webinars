@@ -1,0 +1,60 @@
+.background{
+  background-color: white;
+  height: 100vh;
+}
+
+@media screen and (max-width: 1000px) {
+
+  .broken-page {
+    position: relative;
+    top: -5%;
+    right: 0;
+    margin: auto;
+    height: 25vh;
+    width: 25%;
+    border-bottom: solid 5vh rgb(196, 9, 9);
+    border-right: solid 5vh rgb(196, 9, 9);
+    z-index: 10;
+    transform: rotateZ(10deg);
+
+    &:before {
+      content: '';
+      position: absolute;
+      margin: 20vh 0 0 -99%;
+      border-right: solid 5vh rgb(196, 9, 9);
+      border-bottom: solid 5vh rgb(196, 9, 9);
+      height: 25vh;
+      width: 100%;
+      z-index: 10;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      margin: 40vh 0 0 -190%;
+      border-bottom: solid 5vh rgb(196, 9, 9);
+      border-right: solid 5vh rgb(196, 9, 9);
+      height: 25vh;
+      width: 100%;
+      z-index: 10;
+    }
+  }
+}
+
+#text404{
+  color: rgb(196, 9, 9);
+  padding-left: 20px;
+  margin-top: -6rem;
+  font-size: 3rem;
+}
+#text-error{
+  text-align: center;
+  color: rgb(152, 152, 152);
+  font-size: 3rem;
+  margin-top: 30vh;
+}
+
+a{
+  color: rgb(152, 152, 152);
+  text-decoration: underline;
+}
