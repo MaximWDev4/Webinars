@@ -1,0 +1,23 @@
+<div class="nav-item" routerLinkActive="active" style="display: flex;align-items: baseline;" >
+  <div class="nav-item__header">
+    <a class="nav-item__nav-link nav-link mt-1" [routerLink]="route.route" [routerLinkActive]="'active'">{{route.name}}</a>
+    <label class="nav-item__toggle-btn-label"
+           [ngClass]="{'checked': route.checked}"
+           *ngIf="route.subroutes ? route.subroutes.length > 0 : false"
+           for="{{route.name}}"></label>
+    <input
+      id="{{route.name}}"
+      type="checkbox"
+      class="nav-item__toggle-btn"
+      (click)="route.checked = !route.checked"
+      *ngIf="route.subroutes ? route.subroutes.length > 0 : false">
+  </div>
+  <div class="sub-nav expandable-v" *ngIf="route.hasOwnProperty('subroutes')" [ngClass]="{'expand__1000': route.checked}">
+    <a class="sub-nav__link"
+       [routerLink]="subroute.route"
+       [routerLinkActive]="'active'"
+       *ngFor="let subroute of route.subroutes"
+    >{{subroute.name}}</a>
+  </div>
+</div>
+

@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="card mb-3">
+    <form  [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="card-body">
+      <div class="card-title">
+        <img src="assets/images/logo.svg" class="mx-auto d-block mb-3" alt="..." height="50px">
+        <h3>Вход</h3>
+        <h6 class="text-secondary">Введите E-mail и пароль</h6>
+      </div>
+      <div class="form-group">
+        <input name="email" id="email"
+               type="email"
+               formControlName="email"
+               [ngClass]="{ 'is-invalid': isInvalid('email') }"
+               placeholder="E-mail" class="form-control email_login" >
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <div *ngIf="isInvalid('email')" class="invalid-feedback">
+          <div *ngIf="getErrors('email').required">E-mail является обязательным</div>
+          <div *ngIf="getErrors('email').pattern">Введённое значение не является корректным e-mail адресом</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input name="password" id="password"
+               type="password"
+               formControlName="password"
+               [ngClass]="{ 'is-invalid': isInvalid('password') }"
+               placeholder="Пароль" class="form-control password_login" >
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <div *ngIf="isInvalid('password')" class="invalid-feedback">
+          <div *ngIf="getErrors('password').required">Пароль является обязательным</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-lg-12">
+          <button
+            [disabled]="!(loginForm.valid) || loading"
+            type="submit"
+            class="btn btn-info w-100">
+            <img class="L1" *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            Войти
+          </button>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <span class="text-secondary">Нет аккаунта?</span>
+        <a routerLink="/signup" class="ml-2 text-info">Зарегистрироваться</a>
+      </div>
+
+      <div class="text-center">
+        <span class="text-secondary">Забыли пароль?</span>
+        <a routerLink="/forget-password" class="ml-2 text-info">Восстановить</a>
+      </div>
+    </form>
+    <!--    <div class="signin_block col-sm-4 col-md-4 ">-->
+    <!--      <span class="login_title">Sign In</span>-->
+    <!--      <span class="signin_text">Lorem ipsum dolor ametconsectotur adipiscing</span>-->
+    <!--      <div class="social_container">-->
+    <!--      <div class="social_facebook" id="facebook_block">-->
+    <!--        <i class="fab fa-facebook-f"></i>-->
+    <!--      </div>-->
+    <!--      <div class="social_twitter">-->
+    <!--        <i class="fab fa-twitter"></i>-->
+    <!--      </div>-->
+    <!--      <div class="social_google">-->
+    <!--        <i class="fab fa-google-plus-g"></i>-->
+    <!--      </div>-->
+    <!--      </div>-->
+    <!--      <span class="already_acc">Already have an account?</span>-->
+    <!--      <a routerLink="/" class="create_acc">Log in</a>-->
+    <!--    </div>-->
+  </div>
+</div>

@@ -1,0 +1,4 @@
+
+<div id="mySidenav" class="sidenav" [ngStyle]="{'width': isShown ? '18%' : '0'}">
+  <app-side-menu-item [route]="route"  *ngFor="let route of routes"></app-side-menu-item>
+</div>

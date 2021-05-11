@@ -1,0 +1,68 @@
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #C4C4C4;
+}
+
+* {
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+}
+
+input {
+  background-color: #C4C4C4;
+}
+
+.col-0\.5 {
+  width: 4%;
+}
+
+.col-1\.5 {
+  width: 12.5%;
+}
+
+.wrapper {
+  min-height: 95vh;
+  background: #FFFFFF;
+}
+
+html, body {
+  height: 100%;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.highlightText {
+  font-weight: bold;
+}
+
+.grid-img {
+  width: 60%;
+  padding-top: 60%;
+}
+
+.no-img {
+  background-image: url("../assets/corrupted_image.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.expandable-v {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+}
+.expandable-v.expand__1000 {
+  max-height: 1000px;
+}
+.expandable-v.expand__500 {
+  max-height: 500px;
+}
+.expandable-v.expand__300 {
+  max-height: 300px;
+}
+
+/*# sourceMappingURL=styles.css.map */

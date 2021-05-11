@@ -17,7 +17,7 @@ export class MediaPlayerComponent implements OnInit {
     autoplay: 1,
     allow_full_screen: 0
   };
-  private timePercent: number;
+  timePercent: number;
   private savedVolume: number;
   private startTime: number;
   private playerLoadedTime: number;

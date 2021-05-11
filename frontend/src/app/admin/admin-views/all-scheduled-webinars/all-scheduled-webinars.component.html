@@ -1,0 +1,16 @@
+<div class="container" style="font-size: 1.2rem">
+  <h1>Все вебинары</h1>
+  <div class="row mesh top">
+    <div class="col-3 text-center p-3"><b>Индекс</b></div>
+    <div class="col-3 text-center p-3"><b>Название</b></div>
+    <div class="col-3 text-center p-3"><b>Время начала</b></div>
+    <div class="col-3 text-center p-3"><b>Ссылка на видео</b></div>
+  </div>
+  <div class="row mesh" [ngClass]="{'highlight': odd}" *ngFor="let webinar of scheduledWebinars; let odd = odd">
+    <div class="col-3 p-3">{{webinar.id}}</div>
+    <div class="col-3 p-3">{{webinar.name}}</div>
+    <div class="col-3 p-3">{{webinar.time}}</div>
+    <div class="col-3 p-3"><a href="https://www.youtube.com/watch?v={{webinar.url}}" class="d-flex justify-content-center"><img src="https://img.youtube.com/vi/{{webinar.url}}/1.jpg" alt="{{webinar.url}}" ></a></div>
+    <div class="actions"><div class="edit"></div></div>
+  </div>
+</div>

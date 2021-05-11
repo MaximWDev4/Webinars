@@ -1,0 +1,68 @@
+@import 'variables';
+@import 'mixins';
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: $background-color;
+}
+* {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+}
+input {
+  background-color: $background-color
+}
+
+.col-0\.5{
+  width: 4%;
+  @extend .col-1!optional
+}
+.col-1\.5{
+  width: 12.5%;
+  @extend .col-1!optional
+}
+
+.wrapper {
+  min-height: 95vh;
+  background: #FFFFFF;
+}
+
+html, body { height: 100%; }
+
+.pointer{
+  cursor: pointer;
+}
+
+.highlightText {
+  font-weight: bold;
+}
+
+.grid-img {
+  width: 60%;
+  padding-top: 60%;
+}
+
+.no-img {
+  background-image: url("../assets/corrupted_image.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.expandable-v {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s ease-out;
+  &.expand{
+    &__1000 {
+      max-height: 1000px;
+    }
+    &__500 {
+      max-height: 500px;
+    }
+    &__300 {
+      max-height: 300px;
+    }
+  }
+}
+
