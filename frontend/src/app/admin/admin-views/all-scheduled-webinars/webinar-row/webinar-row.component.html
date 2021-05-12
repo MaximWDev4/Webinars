@@ -1,0 +1,25 @@
+<div class="row mesh" [ngClass]="{'highlight': odd, 'rounded': last}" *ngIf="!!webinar && !expand">
+  <div class="col-2 p-3">{{webinar.id}}</div>
+  <div class="col-2 p-3">{{webinar.name}}</div>
+  <div class="col-3 p-3">{{webinar.time}}</div>
+  <div class="col-3 p-3"><a href="https://www.youtube.com/watch?v={{webinar.url}}" class="d-flex justify-content-center"><img src="https://img.youtube.com/vi/{{webinar.url}}/1.jpg" alt="{{webinar.url}}" ></a></div>
+  <div class="actions col-2">
+    <div class="d-flex justify-content-center align-items-center">
+      <a class="edit pl-1 pr-1" (click)="edit()"><app-edit [color]="'#4c5b72'" style="width: 40px; height: 40px"></app-edit></a>
+      <a class="delete pl-1 pr-1" (click)="delete()"><app-delete [color]="'red'"></app-delete></a>
+    </div>
+  </div>
+</div>
+<div class="record row mesh" [formGroup]="form" [ngClass]="{'highlight': odd, 'rounded': last}" *ngIf="!!webinar && expand">
+  <div class="col-2 p-3">{{webinar.id}}</div>
+  <div class="col-2 p-3"><input class="form-control mt-1" formControlName="name"></div>
+  <div class="col-3 p-3"><input class="form-control mt-1" formControlName="time"></div>
+  <div class="col-3 p-3"><input class="form-control mt-1" formControlName="url"></div>
+
+  <div class="actions col-2">
+    <div class="d-flex justify-content-center align-items-center">
+      <a class="edit pl-1 pr-1" (click)="edit()"><app-edit [color]="'#4c5b72'" style="width: 40px; height: 40px"></app-edit></a>
+      <a class="delete pl-1 pr-1" (click)="delete()"><app-delete [color]="'red'"></app-delete></a>
+    </div>
+  </div>
+</div>

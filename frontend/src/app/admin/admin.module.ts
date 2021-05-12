@@ -8,6 +8,8 @@ import {CommonModule} from '@angular/common';
 import {ScheduleWebinarComponent} from './admin-views/schedule-webinar/schedule-webinar.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AllScheduledWebinarsComponent} from './admin-views/all-scheduled-webinars/all-scheduled-webinars.component';
+import {SvgModule} from '../../svg/svg.module';
+import {WebinarRowComponent} from './admin-views/all-scheduled-webinars/webinar-row/webinar-row.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +17,14 @@ import {AllScheduledWebinarsComponent} from './admin-views/all-scheduled-webinar
     SideMenuComponent,
     SideMenuItemComponent,
     ScheduleWebinarComponent,
+    WebinarRowComponent,
     AllScheduledWebinarsComponent,
   ],
   imports: [
     AdminRoutingModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SvgModule
   ],
   exports: [],
   providers: []

@@ -5,10 +5,10 @@
     background-color: rgba(60, 90, 130, 0.2);
     border-radius: 1rem 1rem 0 0 !important;
   }
-  &:last-child {
+  &.rounded {
     border-radius: 0 0 1rem 1rem !important;
   }
-  &>div {
+  &>div{
     border-left: gray thin solid;
     &:first-child{
       border-left: none;

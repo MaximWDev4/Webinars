@@ -20,9 +20,15 @@ export class AllScheduledWebinarsComponent implements OnInit {
       url: 'OpAHNHFfWH4',
     }
   ];
+  deleted: boolean;
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  edit(): any {
+  }
+
+  delete(): any {
+  }
 }

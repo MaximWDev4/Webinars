@@ -1,5 +1,9 @@
 @import 'variables';
 @import 'mixins';
+@import '~bootstrap/scss/bootstrap';
+
+html, body { height: 100vh; }
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -23,7 +27,6 @@ input {
 }
 
 .wrapper {
-  min-height: 95vh;
   background: #FFFFFF;
 }
 
@@ -42,12 +45,12 @@ html, body { height: 100%; }
   padding-top: 60%;
 }
 
-.no-img {
-  background-image: url("../assets/corrupted_image.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
+//.no-img {
+//  background-image: url("../assets/corrupted_image.png");
+//  background-size: contain;
+//  background-repeat: no-repeat;
+//  background-position: center;
+//}
 
 .expandable-v {
   max-height: 0;

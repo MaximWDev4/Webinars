@@ -19,12 +19,21 @@ export const WEBINAR_PROVIDERS: Provider[] = [
 ];
 
 export function webinarFactory(
-  {params}: ActivatedRoute,
+  route: ActivatedRoute,
   webinarService: WebinarService,
 ): Observable<Webinar> {
+  // return route.paramMap.subscribe(
+  //   (params: ParamMap) => {
+  //     const id = params.get('id');
+  //   }
+  // );
+  const params = route.params;
+
   return params.pipe(
-    switchMap((param: ParamMap) => {
-      const id = param.get('id');
+    switchMap((param) => {
+      console.log(route);
+      console.log(param);
+      const id = param.getAll('id');
 
       return webinarService.getWebinarByName$(id);
     }),

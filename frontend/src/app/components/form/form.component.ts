@@ -9,16 +9,16 @@ import {SearchService} from '../../_services/search.service';
 })
 export class FormComponent implements OnInit {
 
-  @Input() phone: boolean = false;
-  @Input() email: boolean = false;
-  @Input() name: boolean = false;
+  @Input() phone = false;
+  @Input() email = false;
+  @Input() name = false;
 
   // version = VERSION.full;
   PHONE_MASK = '';
   contact: FormGroup = new FormGroup({hidden: new FormControl()});
   customPatterns = {1: {pattern: new RegExp('\(\[А-ЯA-Zа-яa-z \-\]\)+')}, 2: {pattern: new RegExp('\(\[А-ЯA-Zа-яa-z "\-\]\)+')}};
   modalHref: string;
-  showModal = true;
+  showModal = false;
 
   constructor(private searchService: SearchService) { }
 
@@ -42,8 +42,8 @@ export class FormComponent implements OnInit {
   submit(): void {
     const form = {
       reg_to_webinar: 1,
-      name: this.contact.get('Name').value,
-      email: this.contact.get('Email').value,
+      name: this.contact.controls.Name.value,
+      email: this.contact.controls.Email.value,
       // phone: this.contact.get('phone').value,
       // company: this.contact.get('Company').value,
     };
@@ -56,6 +56,6 @@ export class FormComponent implements OnInit {
   }
 
   close(): void {
-    setTimeout(() => {this.showModal = ! this.showModal}, 150);
+    setTimeout(() => { this.showModal = !this.showModal; }, 1500);
   }
 }
