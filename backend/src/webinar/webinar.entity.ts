@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, Timestamp } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Webinar {
@@ -9,7 +9,7 @@ export class Webinar {
   chatroomId: number;
 
   @Column()
-  url: Timestamp;
+  url: string;
 
   @Column()
   name: string;

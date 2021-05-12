@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcryptjs';
 import * as nodemailer from 'nodemailer';
 import {default as config} from '../../config';
-import { Injectable, HttpException, HttpStatus, HttpService } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { JWTService } from './jwt.service';
 import { UserDto } from '../users/dto/user.dto';
 import { EmailVerification } from './email-ver.entity';

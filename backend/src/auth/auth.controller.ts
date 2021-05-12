@@ -41,9 +41,13 @@ export class AuthController {
       } else {
         return new ResponseError("REGISTRATION.ERROR.MAIL_NOT_SENT");
       }
-    } catch(error){
-      return new ResponseError("REGISTRATION.ERROR.GENERIC_ERROR", error);
     }
+    finally {
+      console.log('1');
+    }
+    // catch(error){
+    //   return new ResponseError("REGISTRATION.ERROR.GENERIC_ERROR", error);
+    // }
   }
 
   @Get('email/verify/:token')

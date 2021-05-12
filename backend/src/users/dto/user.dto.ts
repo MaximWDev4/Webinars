@@ -1,12 +1,12 @@
 export class UserDto {
   constructor(object: any) {
-    this.name = object.name;
-    this.surname = object.surname;
+    this.userName = object.userName;
+    this.password = object.password;
     this.email = object.email;
-    this.phone = object.phone;
+    this.licence = object.licence;
   }
-  readonly name: string;
-  readonly surname: string;
+  readonly userName: string;
   readonly email: string;
-  readonly phone: string;
+  password: string;
+  licence: number;
 }

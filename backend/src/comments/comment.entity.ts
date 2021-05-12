@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn, Timestamp } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Comment {
@@ -9,7 +9,7 @@ export class Comment {
   chatroomId: number;
 
   @Column()
-  timestamp: Timestamp;
+  timestamp: number;
 
   @Column()
   userName: string;

@@ -12,11 +12,11 @@ export class User {
   password: string;
 
   @Column({ default: 0 })
-  license: 0 | 3 | 5 | 7;
+  licence: 0 | 3 | 5 | 7;
 
   @Column()
   email: string;
 
   @Column({ default: false })
-  emailVerified: boolean
+  emailVerified: boolean;
 }
