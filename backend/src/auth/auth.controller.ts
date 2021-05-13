@@ -7,6 +7,7 @@ import { IResponse } from '../common/response.interface';
 import { UsersService } from '../users/users.service';
 import { UserDto } from '../users/dto/user.dto';
 import { CreateUserDto } from '../users/dto/create-users.dto';
+import { User } from '../users/user.entity';
 // import { ResetPasswordDto } from './dto/reset-password.dto';
 
 export class Login {
@@ -33,21 +34,21 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   async register(@Body() createUserDto: CreateUserDto): Promise<IResponse> {
     try {
-      const newUser = new UserDto(await this.userService.createNewUser(createUserDto));
-      await this.authService.createEmailToken(newUser.email);
-      const sent = await this.authService.sendEmailVerification(newUser.email);
-      if(sent){
-        return new ResponseSuccess("REGISTRATION.USER_REGISTERED_SUCCESSFULLY");
-      } else {
-        return new ResponseError("REGISTRATION.ERROR.MAIL_NOT_SENT");
-      }
+      this.userService.createNewUser(createUserDto).then(async (newUser: User) => {
+
+        const sent = await this.authService.createEmailVer(newUser.email).then(async () => {
+          return await this.authService.sendEmailVerification(newUser.email).catch((e) => {throw e});
+        }).catch((e) => {throw e});
+        if (sent) {
+          return new ResponseSuccess("REGISTRATION.USER_REGISTERED_SUCCESSFULLY");
+        } else {
+          return new ResponseError("REGISTRATION.ERROR.MAIL_NOT_SENT");
+        }
+      }).catch((e) => {throw e});
     }
-    finally {
-      console.log('1');
+    catch(error){
+      return new ResponseError("REGISTRATION.ERROR.GENERIC_ERROR", error);
     }
-    // catch(error){
-    //   return new ResponseError("REGISTRATION.ERROR.GENERIC_ERROR", error);
-    // }
   }
 
   @Get('email/verify/:token')

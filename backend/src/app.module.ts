@@ -5,6 +5,7 @@ import { CommentsModule } from './comments/comments.module';
 import { UsersModule } from './users/users.module';
 import { getConnectionOptions } from 'typeorm';
 import { AuthModule } from './auth/auth.module';
+import { MetamorphosisModule } from '@fabio.formosa/metamorphosis-nest';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { AuthModule } from './auth/auth.module';
           autoLoadEntities: true,
         }),
     }),
+    MetamorphosisModule.register({logger: true}),
     AuthModule,
   ],
 })

@@ -12,7 +12,7 @@ export class User {
   password: string;
 
   @Column({ default: 0 })
-  licence: 0 | 3 | 5 | 7;
+  licence: number;
 
   @Column()
   email: string;

@@ -7,7 +7,7 @@ import { UserDto } from '../users/dto/user.dto';
 import { EmailVerification } from './email-ver.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../users/user.entity';
-import { Repository } from 'typeorm';
+import { getConnection, Repository } from 'typeorm';
 
 
 @Injectable()
@@ -27,7 +27,7 @@ export class AuthService {
     const isValidPass = await bcrypt.compare(password, userFromDb.password);
 
     if(isValidPass){
-      const accessToken = await this.jwtService.createToken(email, userFromDb.license);
+      const accessToken = await this.jwtService.createToken(email, userFromDb.licence);
       return { token: accessToken, user: new UserDto(userFromDb)}
     } else {
       throw new HttpException('LOGIN.ERROR', HttpStatus.UNAUTHORIZED);
@@ -35,13 +35,33 @@ export class AuthService {
 
   }
 
+  async createEmailVer(email: string): Promise<boolean> {
+    const emailVerification = await this.emailVerificationRepo.findOne({ email: email });
+    if (!emailVerification) {
+      return await getConnection()
+        .createQueryBuilder()
+        .insert()
+        .into(EmailVerification)
+        .values([
+          { email: email,
+            emailToken: (Math.floor(Math.random() * (9000000)) + 1000000).toString(), //Generate 7 digits number
+            timestamp: new Date() },
+        ])
+        .execute().then(async () => {
+          return true
+        });
+    } else {
+      throw new HttpException('LOGIN.EMAIL_ALREADY_QUEUED', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
   async createEmailToken(email: string): Promise<boolean> {
-    const emailVerification = await this.emailVerificationRepo.findOne({email: email});
-    if (emailVerification && ( (new Date().getTime() - emailVerification.timestamp.getTime()) / 60000 < 15 )){
+    const emailVerification = await this.emailVerificationRepo.findOne({ email: email });
+    if (((new Date().getTime() - emailVerification.timestamp.getTime()) / 60000 < 15)) {
       throw new HttpException('LOGIN.EMAIL_SENDED_RECENTLY', HttpStatus.INTERNAL_SERVER_ERROR);
     } else {
       await this.emailVerificationRepo.update(
-        {email: email},
+        { email: email },
         {
           email: email,
           emailToken: (Math.floor(Math.random() * (9000000)) + 1000000).toString(), //Generate 7 digits number
@@ -148,7 +168,7 @@ export class AuthService {
 
       return sent;
     } else {
-      throw new HttpException('REGISTER.USER_NOT_REGISTERED', HttpStatus.FORBIDDEN);
+      throw new HttpException('LOGIN.USER_NOT_REGISTERED', HttpStatus.FORBIDDEN);
     }
   }
 

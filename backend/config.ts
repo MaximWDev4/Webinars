@@ -11,7 +11,7 @@ export default {
     "host": "smtp.dreamhost.com",
     "port": "465",
     "secure": true,
-    "user": "automail",
+    "user": "automail@event-manager.club",
     "pass": "K99MeD#9N?bEQK5x"
   }
 }

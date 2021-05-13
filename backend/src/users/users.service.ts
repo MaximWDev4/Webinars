@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcryptjs';
 import { Get, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { getConnection, Repository } from 'typeorm';
 import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-users.dto';
 import { UserDto } from './dto/user.dto';
@@ -32,10 +32,17 @@ export class UsersService {
       const userRegistered = await this.findByEmail(newUser.email);
       if(!userRegistered){
         newUser.password = await bcrypt.hash(newUser.password, saltRounds);
-        newUser.licence = 0;
         console.log(newUser);
-        await this.usersRepository.create({emailVerified: false, ...newUser });
-        return await this.findByEmail(newUser.email);
+        return  await getConnection()
+          .createQueryBuilder()
+          .insert()
+          .into(User)
+          .values([
+            { email: newUser.email, userName: newUser.userName, licence: 0, password: newUser.password },
+          ])
+          .execute().then(async () => {
+            return await this.findByEmail(newUser.email);
+          });
       } else if (!userRegistered.emailVerified) {
         return userRegistered;
       } else {
