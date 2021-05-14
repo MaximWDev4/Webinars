@@ -8,12 +8,17 @@ import { EmailVerification } from './email-ver.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../users/user.entity';
 import { getConnection, Repository } from 'typeorm';
+import { RefreshToken } from './refreshToken.entity';
+import { options } from 'tsconfig-paths/lib/options';
+import randtoken from 'rand-token';
+import { compareElementAt } from '@nestjs/websockets/utils/compare-element.util';
 
 
 @Injectable()
 export class AuthService {
   constructor(@InjectRepository(User) private readonly userRepo: Repository<User>,
               @InjectRepository(EmailVerification) private readonly emailVerificationRepo: Repository<EmailVerification>,
+              @InjectRepository(RefreshToken) private readonly refreshTokenRepo: Repository<RefreshToken>,
               // @InjectRepository('ForgottenPassword') private readonly forgottenPasswordModel: Repo<ForgottenPassword>,
               // @InjectRepository('ConsentRegistry') private readonly consentRegistryModel: Repo<ConsentRegistry>,
               private readonly jwtService: JWTService) {}
@@ -28,11 +33,36 @@ export class AuthService {
 
     if(isValidPass){
       const accessToken = await this.jwtService.createToken(email, userFromDb.licence);
+      const refreshToken = randtoken.uid(256);
+      await getConnection()
+        .createQueryBuilder()
+        .insert()
+        .into(RefreshToken)
+        .values([
+          { token: refreshToken,
+            email: email,
+          },
+        ])
+        .execute();
       return { token: accessToken, user: new UserDto(userFromDb)}
     } else {
       throw new HttpException('LOGIN.ERROR', HttpStatus.UNAUTHORIZED);
     }
 
+  }
+
+  async refreshToken(token: string, email) {
+    const userFromDb = await this.userRepo.findOne({email: email});
+    const tokenFromDb = await this.refreshTokenRepo.findOne({token: token});
+    if (!!tokenFromDb) {
+      const isValidToken = token === tokenFromDb.token;
+      if (isValidToken) {
+        const accessToken = await this.jwtService.createToken(userFromDb.email, userFromDb.licence);
+        return { token: accessToken, user: new UserDto(userFromDb)}
+      }
+    } else {
+      throw new HttpException('REFRESH.ERROR', HttpStatus.UNAUTHORIZED);
+    }
   }
 
   async createEmailVer(email: string): Promise<boolean> {

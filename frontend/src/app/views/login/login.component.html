@@ -1,10 +1,9 @@
-<div class="container">
-  <div class="card mb-3">
+  <div class="card">
     <form  [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="card-body">
       <div class="card-title">
-        <img src="assets/images/logo.svg" class="mx-auto d-block mb-3" alt="..." height="50px">
-        <h3>Вход</h3>
-        <h6 class="text-secondary">Введите E-mail и пароль</h6>
+        <app-logo></app-logo>
+        <h1>Вход</h1>
+        <h2 class="text-body">Введите E-mail и пароль</h2>
       </div>
       <div class="form-group">
         <input name="email" id="email"
@@ -69,4 +68,3 @@
     <!--      <a routerLink="/" class="create_acc">Log in</a>-->
     <!--    </div>-->
   </div>
-</div>

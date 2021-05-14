@@ -20,14 +20,13 @@ export class AuthService {
 
 
   loginUser(user: User): any {
-    return this.http.post<any>(`${environment.apiUrl}/auth/login`,
+    return this.http.post<any>(`${environment.apiUrl}/auth/email/login`,
       {userName: user.userName, password: user.password})
       .pipe(
         tap(data => {
           if (data.success) {
-            this.storeHasProfile(data.hasProfile);
             this.storeuserName(data.userName);
-            this.storeRoles(data.license);
+            this.storeLicence(data.license);
             this.storeJwtToken(data.jwt);
             this.storeRefreshToken(data.refreshToken);
           }
@@ -35,13 +34,9 @@ export class AuthService {
       );
   }
 
-  storeHasProfile(hasProfile: boolean): any {
-    localStorage.setItem('hasProfile', JSON.stringify(hasProfile));
-  }
-
   registerUser(regData: any): any {
-    return this.http.post<any>(`${environment.apiUrl}/auth/signup`,
-      { userName: regData.userName.value, password: regData.password.value }).pipe(
+    return this.http.post<any>(`${environment.apiUrl}/auth/email/register`,
+      { userName: regData.userName.value, email: regData.email, password: regData.password.value }).pipe(
       map(data => data)
     );
   }
@@ -59,6 +54,10 @@ export class AuthService {
   //       return userObj;
   //     }));
   // }
+
+  getUserLicence(): any {
+    return localStorage.getItem('licence');
+  }
 
   doLoginUser(tokens: Tokens): any {
     this.storeTokens(tokens);
@@ -78,7 +77,7 @@ export class AuthService {
   }
 
   refreshToken(): any {
-    return this.http.post<any>(`${environment.apiUrl}/auth/refresh`, {refreshToken: this.getRefreshToken()})
+    return this.http.post<any>(`${environment.apiUrl}/token/refresh`, {refreshToken: this.getRefreshToken()})
       .pipe(tap((tokens: Tokens) => {
         this.storeJwtToken(tokens.jwt);
       }));
@@ -117,8 +116,8 @@ export class AuthService {
     localStorage.setItem(this.REFRESH_TOKEN, refreshToken);
   }
 
-  storeRoles(roles: any): any {
-    localStorage.setItem('roles', roles);
+  storeLicence(licence: any): any {
+    localStorage.setItem('licence', licence);
   }
 
   storeuserName(userName: string): any {

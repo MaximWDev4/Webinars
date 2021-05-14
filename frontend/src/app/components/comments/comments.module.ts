@@ -7,20 +7,22 @@ import {TextFieldModule} from '@angular/cdk/text-field';
 import {MatInputModule} from '@angular/material/input';
 import {WebsocketModule} from '../../_services/websocket.module';
 import {environment} from '../../../environments/environment';
+import {SvgModule} from '../../../svg/svg.module';
 
 
 @NgModule({
   exports: [
     CommentsComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ScrollingModule,
-    TextFieldModule,
-    MatInputModule,
-    WebsocketModule.config( {url: `ws://localhost:8000/ws/chat/1/`})
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ScrollingModule,
+        TextFieldModule,
+        MatInputModule,
+        WebsocketModule.config({url: `ws://localhost:8000/ws/chat/1/`}),
+        SvgModule
+    ],
   declarations: [
     CommentsComponent
   ],

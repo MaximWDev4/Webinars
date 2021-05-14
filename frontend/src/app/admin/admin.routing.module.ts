@@ -16,6 +16,10 @@ const routes: Routes = [
         path: RoutingMap.allScheduledWebinars.routeName,
         component: RoutingMap.allScheduledWebinars.child,
       },
+      {
+        path: RoutingMap.users.routeName,
+        component: RoutingMap.users.child,
+      },
     ]
   }
 ];

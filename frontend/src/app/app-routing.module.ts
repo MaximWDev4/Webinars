@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {PageNotFoundComponent} from './views/page-not-found/page-not-found.component';
 import {LoginComponent} from './views/login/login.component';
-import {AuthGuard} from './_helpers/auth.guard';
+import {
+  RoleGuardService as RoleGuard
+} from './_services/licence-guars.service';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full',  redirectTo: 'home'},
@@ -12,12 +14,24 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    // canActivate: [AuthGuard],
-    // canActivateChild: [AuthGuard],
+    // canActivate: [RoleGuard],
+    // data: {
+    //   expectedLicence: 5
+    // },
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
   },
-  {path: 'home/:id', loadChildren: () => import('./views/home-page/home-page.module').then(m => m.HomePageModule)},
-  {path: 'webinar/:id', loadChildren: () => import('./views/webinar-room/webinar-room.module').then(m => m.WebinarRoomModule)},
+  {
+    path: 'home/:id',
+    loadChildren: () => import('./views/home-page/home-page.module').then(m => m.HomePageModule)
+  },
+  {
+    path: 'webinar/:id',
+    // canActivate: [RoleGuard],
+    // data: {
+    //   expectedLicence: 0
+    // },
+    loadChildren: () => import('./views/webinar-room/webinar-room.module').then(m => m.WebinarRoomModule)
+  },
   { path: '**', component: PageNotFoundComponent }
 ];
 

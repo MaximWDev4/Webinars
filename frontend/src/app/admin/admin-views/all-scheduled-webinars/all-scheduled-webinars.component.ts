@@ -9,15 +9,15 @@ export class AllScheduledWebinarsComponent implements OnInit {
   scheduledWebinars = [
     {
       id: '1',
-      name: 'Шахматы',
+      name: 'Быстрый старт - как за 3 месяца заработать $4105',
       time: '05.06.21 20:00',
-      url: 'vAwWyibaUK0',
+      url: 'u0UzZKPJEpc',
     },
     {
       id: '2',
-      name: 'Танки',
+      name: 'Презентация круизного клуба InCruises за 10 минут',
       time: '05.06.21 21:00',
-      url: 'OpAHNHFfWH4',
+      url: 'VFu8035iR1E',
     }
   ];
   deleted: boolean;

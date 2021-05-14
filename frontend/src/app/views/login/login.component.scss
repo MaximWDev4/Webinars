@@ -2,6 +2,11 @@
 *{
   transition: all .5s  ease;
 }
+
+body, html {
+  height: 0 !important;
+}
+
 .has-error, .has-error>input, .has-error>select, .form-group.has-error label{
 
   border-color: #f51e61;
@@ -215,9 +220,14 @@ span {
 .card {
   background-color: white;
   border-color: transparent;
-
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
   max-width: 25rem;
-  margin: 15% auto;
+  max-height: 500px;
+  margin: auto;
 }
 
 .card-title {

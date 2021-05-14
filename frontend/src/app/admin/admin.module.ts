@@ -10,6 +10,9 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {AllScheduledWebinarsComponent} from './admin-views/all-scheduled-webinars/all-scheduled-webinars.component';
 import {SvgModule} from '../../svg/svg.module';
 import {WebinarRowComponent} from './admin-views/all-scheduled-webinars/webinar-row/webinar-row.component';
+import {UsersComponent} from './admin-views/users/users.component';
+import {UserRowComponent} from './admin-views/users/user-row/user-row.component';
+import {NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,12 +22,15 @@ import {WebinarRowComponent} from './admin-views/all-scheduled-webinars/webinar-
     ScheduleWebinarComponent,
     WebinarRowComponent,
     AllScheduledWebinarsComponent,
+    UsersComponent,
+    UserRowComponent,
   ],
   imports: [
     AdminRoutingModule,
     CommonModule,
     ReactiveFormsModule,
-    SvgModule
+    SvgModule,
+    NgbTooltipModule
   ],
   exports: [],
   providers: []

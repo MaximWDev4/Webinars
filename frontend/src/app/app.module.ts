@@ -12,6 +12,8 @@ import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/h
 import {AuthGuard} from './_helpers/auth.guard';
 import {ErrorInterceptor} from './_helpers/error.interceptor';
 import {JwtInterceptor} from './_helpers/jwt.interceptor';
+import {RoleGuardService} from './_services/licence-guars.service';
+import {SvgModule} from '../svg/svg.module';
 
 @NgModule({
   declarations: [
@@ -25,11 +27,13 @@ import {JwtInterceptor} from './_helpers/jwt.interceptor';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    SvgModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     JwtInterceptor,
+    RoleGuardService,
     Global,
     HttpClient,
     AuthGuard,

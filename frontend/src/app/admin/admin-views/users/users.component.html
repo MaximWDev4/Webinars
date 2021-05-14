@@ -1,0 +1,11 @@
+<div style="margin-left: 18%; padding: 25px; font-size: 1.2rem">
+  <h1>Все вебинары</h1>
+  <div class="row mesh top">
+    <div class="col-2 text-center p-3"><b>ID</b></div>
+    <div class="col-2 text-center p-3"><b>Псевдоним</b></div>
+    <div class="col-3 text-center p-3"><b>E-mail</b></div>
+    <div class="col-3 text-center p-3"><b>Права</b></div>
+    <div class="col-2 text-center p-3"><b>Действия</b></div>
+  </div>
+  <app-user-row [odd]="odd" [last]="last" [user]="user" *ngFor="let user of users; let odd = odd; let last = last"></app-user-row>
+</div>

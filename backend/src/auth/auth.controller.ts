@@ -8,6 +8,7 @@ import { UsersService } from '../users/users.service';
 import { UserDto } from '../users/dto/user.dto';
 import { CreateUserDto } from '../users/dto/create-users.dto';
 import { User } from '../users/user.entity';
+import { RefreshToken } from './refreshToken.entity';
 // import { ResetPasswordDto } from './dto/reset-password.dto';
 
 export class Login {
@@ -27,6 +28,17 @@ export class AuthController {
       return new ResponseSuccess("LOGIN.SUCCESS", response);
     } catch(error) {
       return new ResponseError("LOGIN.ERROR", error);
+    }
+  }
+
+  @Post('token/refresh')
+  @HttpCode(HttpStatus.OK)
+  public async refresh(@Body() token: RefreshToken): Promise<IResponse> {
+    try {
+      const response = await this.authService.refreshToken(token.token, token.email);
+      return new ResponseSuccess("REFRESH.SUCCESS", response);
+    } catch(error) {
+      return new ResponseError("REFRESH.ERROR", error);
     }
   }
 

@@ -73,11 +73,7 @@ export class LoginComponent implements OnInit {
     this.authService.loginUser(formData).subscribe(
       result => {
         if (result.success) {
-          if (result.hasProfile) {
             this.router.navigate([this.returnUrl]);
-          } else {
-            this.router.navigate(['/profile']);
-          }
         } else {
           alert(result.message);
         }

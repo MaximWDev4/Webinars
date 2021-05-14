@@ -1,6 +1,6 @@
-import {LoadChildrenCallback} from '@angular/router';
 import {ScheduleWebinarComponent} from './admin-views/schedule-webinar/schedule-webinar.component';
 import {AllScheduledWebinarsComponent} from './admin-views/all-scheduled-webinars/all-scheduled-webinars.component';
+import {UsersComponent} from './admin-views/users/users.component';
 
 export type RouteMap = {
   name: string,
@@ -15,6 +15,7 @@ export type RouteMap = {
 type RoutingMap = {
   scheduleWebinar: RouteMap,
   allScheduledWebinars: RouteMap,
+  users: RouteMap,
 };
 
 export type MyRoute = {
@@ -36,5 +37,11 @@ export const RoutingMap: RoutingMap = {
     routeName: 'allscheduled',
     absoluteRoute: '/admin/allscheduled',
     child: AllScheduledWebinarsComponent,
+  },
+  users: {
+    name: 'Пользователи',
+    routeName: 'users',
+    absoluteRoute: '/admin/users',
+    child: UsersComponent,
   }
 };

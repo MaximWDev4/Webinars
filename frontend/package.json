@@ -28,6 +28,7 @@
     "bootstrap": "^4.5.0",
     "google-protobuf": "^3.15.8",
     "grpc": "^1.24.6",
+    "jwt-decode": "^3.1.2",
     "ngx-mask": "^9.1.2",
     "ngx-timeline-vertical": "^1.0.3",
     "ngx-youtube-player": "^9.1.0",
