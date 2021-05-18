@@ -21,11 +21,11 @@ export class AuthService {
 
   loginUser(user: User): any {
     return this.http.post<any>(`${environment.apiUrl}/auth/email/login`,
-      {userName: user.userName, password: user.password})
+      {email: user.email, password: user.password})
       .pipe(
         tap(data => {
           if (data.success) {
-            this.storeuserName(data.userName);
+            this.storeuserName(data.email);
             this.storeLicence(data.license);
             this.storeJwtToken(data.jwt);
             this.storeRefreshToken(data.refreshToken);

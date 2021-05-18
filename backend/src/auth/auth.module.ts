@@ -9,9 +9,10 @@ import { UsersService } from '../users/users.service';
 import { JWTService } from './jwt.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EmailVerification } from './email-ver.entity';
+import { RefreshToken } from './refreshToken.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, EmailVerification])],
+  imports: [TypeOrmModule.forFeature([User, EmailVerification, RefreshToken])],
   controllers: [AuthController],
   providers: [AuthService, UsersService, JWTService, JwtStrategy],
 })

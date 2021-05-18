@@ -5,7 +5,6 @@ import { IResponse } from '../common/response.interface';
 // import { CreateUserDto } from '../users/dto/create-user.dto';
 // import { UserDto } from '../users/dto/user.dto';
 import { UsersService } from '../users/users.service';
-import { UserDto } from '../users/dto/user.dto';
 import { CreateUserDto } from '../users/dto/create-users.dto';
 import { User } from '../users/user.entity';
 import { RefreshToken } from './refreshToken.entity';

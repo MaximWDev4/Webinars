@@ -26,17 +26,13 @@ const routes: Routes = [
   },
   {
     path: 'webinar/:id',
-    // canActivate: [RoleGuard],
-    // data: {
-    //   expectedLicence: 0
-    // },
     loadChildren: () => import('./views/webinar-room/webinar-room.module').then(m => m.WebinarRoomModule)
   },
   { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy', paramsInheritanceStrategy: 'always'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

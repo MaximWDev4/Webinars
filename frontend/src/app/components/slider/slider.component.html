@@ -1,5 +1,5 @@
-<ngb-carousel  [showNavigationIndicators]="showNavigation" [ngStyle]="{'color': global.textColor}">
-  <ng-template ngbSlide *ngFor="let slide of slides">
+<ngb-carousel [showNavigationIndicators]="showNavigation" [ngStyle]="{'color': global.textColor}">
+  <ng-template ngbSlide *ngFor="let slide of slides;">
     <div class="bg" [ngStyle]="{'background-image': 'url('+kowychki+'../assets/'+slide.background+kowychki+')', 'background-color': global.mainColor}">
       <div class="carousel-caption">
         <div class="carousel-content">

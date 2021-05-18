@@ -6,12 +6,16 @@ import { UsersModule } from './users/users.module';
 import { getConnectionOptions } from 'typeorm';
 import { AuthModule } from './auth/auth.module';
 import { MetamorphosisModule } from '@fabio.formosa/metamorphosis-nest';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     WebinarModule,
     CommentsModule,
     UsersModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRootAsync({
       useFactory: async () =>
         Object.assign(await getConnectionOptions(), {

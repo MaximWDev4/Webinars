@@ -1,6 +1,6 @@
 <div class="navbar col-3 col-sm-2 col-md-2 col-lg-12">
 <div class="d-flex">
-  <a class="navbar-brand" href="#" [ngStyle]="{'color': global.textColor}">Navbar</a>
+  <a class="navbar-brand" href="#" [ngStyle]="{'color': global.textColor}"><app-logo [height]="40" [width]="160"></app-logo></a>
 
   <div class="header hide-til-small">
     <a class="target-burger" [ngClass]="{'toggled': pushed}" (click)="pushed = !pushed">

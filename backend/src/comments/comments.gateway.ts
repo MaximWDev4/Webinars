@@ -1,26 +1,51 @@
 import {
-  MessageBody,
   SubscribeMessage,
   WebSocketGateway,
+  OnGatewayInit,
   WebSocketServer,
+  OnGatewayConnection,
+  OnGatewayDisconnect,
   WsResponse,
 } from '@nestjs/websockets';
-import { Server } from 'ws';
-import { from, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Logger } from '@nestjs/common';
+import { Socket } from 'socket.io';
+import { Server } from 'socket.io';
 
-@WebSocketGateway()
-export class CommentsGateway {
-  @WebSocketServer()
-  server: Server;
+@WebSocketGateway({ namespace: '/chat' })
+export class MessageGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
 
-  @SubscribeMessage('events')
-  findAll(@MessageBody() data: any): Observable<WsResponse<number>> {
-    return from([1, 2, 3]).pipe(map(item => ({ event: 'events', data: item })));
+  @WebSocketServer() server: Server;
+
+  private logger: Logger = new Logger('MessageGateway');
+
+  @SubscribeMessage('msgToServer')
+  public handleMessage(client: Socket, payload: any): Promise<WsResponse<any>> {
+    this.logger.log(payload.text);
+    return this.server.to(payload.room).emit('msgToClient', {user: payload.user, text: payload.text});
   }
 
-  @SubscribeMessage('identity')
-  async identity(@MessageBody() data: number): Promise<number> {
-    return data;
+  @SubscribeMessage('joinRoom')
+  public joinRoom(client: Socket, room: string): void {
+    client.join(room);
+    client.emit('joinedRoom', room);
+    this.logger.log('connected');
+  }
+
+  @SubscribeMessage('leaveRoom')
+  public leaveRoom(client: Socket, room: string): void {
+    client.leave(room);
+    client.emit('leftRoom', room);
+  }
+
+  public afterInit(server: Server): void {
+    return this.logger.log('Init');
+  }
+
+  public handleDisconnect(client: Socket): void {
+    return this.logger.log(`Client disconnected: ${client.id}`);
+  }
+
+  public handleConnection(client: Socket): void {
+    return this.logger.log(`Client connected: ${client.id}`);
   }
 }

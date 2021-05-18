@@ -18,9 +18,9 @@ export interface IWsMessage<T> {
 }
 export const WS = {
   ON: {
-    MESSAGES: 'messages'
+    MESSAGES: 'msgToServer'
   },
   SEND: {
-    TEXT: 'text'
+    MESSAGE: 'msgToServer'
   }
 };

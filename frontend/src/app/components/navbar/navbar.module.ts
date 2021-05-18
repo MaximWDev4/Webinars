@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import {NavbarComponent} from './navbar.component';
 import {CommonModule} from '@angular/common';
+import {SvgModule} from '../../../svg/svg.module';
 
 
 @NgModule({
@@ -8,7 +9,8 @@ import {CommonModule} from '@angular/common';
     NavbarComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SvgModule
   ],
   exports: [
     NavbarComponent

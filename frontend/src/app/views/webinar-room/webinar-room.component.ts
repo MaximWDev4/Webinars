@@ -1,4 +1,5 @@
 import {Component,  OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-webinar-room',
@@ -6,11 +7,17 @@ import {Component,  OnInit} from '@angular/core';
   styleUrls: ['./webinar-room.component.scss']
 })
 export class WebinarRoomComponent implements OnInit {
+  roomNom: any;
 
 
-  ngOnInit(): void {
+  constructor(private route: ActivatedRoute,  private router: Router) {
+
   }
 
-  constructor() {
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      console.log(params);
+      this.roomNom = params.id;
+    });
   }
 }

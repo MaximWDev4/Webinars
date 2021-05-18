@@ -1,26 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { RedisIoAdapter } from './redis.adapter';
 
 async function bootstrap() {
-  /**
-   * This example contains a hybrid application (HTTP + gRPC)
-   * You can switch to a microservice with NestFactory.createMicroservice() as follows:
-   *
-   * const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
-   *  transport: Transport.GRPC,
-   *  options: {
-   *    package: 'hero',
-   *    protoPath: join(__dirname, './hero/hero.proto'),
-   *  }
-   * });
-   * await app.listenAsync();
-   *
-   */
-  const app = await NestFactory.create(AppModule);
-  // app.connectMicroservice<MicroserviceOptions>(grpcClientOptions);
 
-  // await app.startAllMicroservicesAsync();
-  await app.listen(process.env.PORT || 3001);
+  const app = await NestFactory.create(AppModule);
+  app.enableCors({origin: false});
+  app.useWebSocketAdapter(new RedisIoAdapter(app));
+  const port = parseInt(process.env.SERVER_PORT);
+  await app.listen(port);
   console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();

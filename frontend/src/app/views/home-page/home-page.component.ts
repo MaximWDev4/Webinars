@@ -46,7 +46,7 @@ export class HomePageComponent implements OnInit {
 
   slides = [
     { background: 'slider-back-1.jpg',
-      title: 'LOREM',
+      title: 'Почему я создала школу event-менеджера?',
       subtitle: ''
     },
     { background: 'slider-back-2.jpg',

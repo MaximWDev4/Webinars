@@ -1,8 +1,10 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
-import {WebsocketService} from '../../_services/websocket.service';
-import {WS} from '../../_models/WSinterfaces';
-import {Observable} from 'rxjs';
+// import {WebsocketService} from '../../_services/websocket.service';
+// import {WS} from '../../_models/WSinterfaces';
+import {Observable, Subscription} from 'rxjs';
+// import {ActivatedRoute} from '@angular/router';
+import {CommentsService} from '../../_services/comment.service';
 
 export interface IMessage {
   id: number;
@@ -14,7 +16,8 @@ export interface IMessage {
   templateUrl: './comments.component.html',
   styleUrls: ['./comments.component.scss'],
 })
-export class CommentsComponent implements OnInit, AfterViewInit{
+export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy{
+  @Input() roomNom = '';
   @ViewChild(CdkVirtualScrollViewport) virtualScroll: CdkVirtualScrollViewport;
   comments = [{author: 'Mike', content: 'Здравствуйте!'},
     {author: 'El', content: 'здрасте'}, {author: 'Mike', content: 'Привет всем'},
@@ -25,23 +28,17 @@ export class CommentsComponent implements OnInit, AfterViewInit{
   messages$: Observable<IMessage[]>;
   // private counter$: Observable<number>;
   // private texts$: Observable<string[]>;
-  constructor(private wsService: WebsocketService) {
-    this.wsService.on<IMessage[]>('messages')
-      .subscribe((messages: IMessage[]) => {
-        console.log(messages);
-        this.wsService.send('text', 'Test Text!');
-      });
-  }
+  constructor(
+    private commentService: CommentsService,
+    // private wsService: WebsocketService
+  ) {}
 
   ngOnInit(): void {
-
-    // get messages
-    this.messages$ = this.wsService.on<IMessage[]>(WS.ON.MESSAGES);
-    // // get counter
-    // this.counter$ = this.wsService.on<number>(WS.ON.COUNTER);
-    //
-    // // get texts
-    // this.texts$ = this.wsService.on<string[]>(WS.ON.UPDATE_TEXTS);
+    this.commentService.joinRoom('chat' + this.roomNom);
+    setTimeout(() => this.commentService.getMessage().subscribe(data => {
+      this.comments.push({author: data.user, content: data.text});
+      this.comments = [...this.comments];
+    }), 500);
   }
 
   ngAfterViewInit(): void {
@@ -56,11 +53,15 @@ export class CommentsComponent implements OnInit, AfterViewInit{
 
   liveComment(): void {
     if (this.commentInputValue.length > 0) {
-      this.wsService.send(WS.SEND.TEXT, this.commentInputValue);
+      // this.wsService.send(WS.SEND.MESSAGE, { comment: this.commentInputValue, room: 'chat' + this.roomNom });
+      this.commentService.msgToServer({text: this.commentInputValue, user: 'Maxim', room: 'chat' + this.roomNom});
       this.comments.push({author: 'You', content: this.commentInputValue});
       this.comments = [...this.comments];
       this.commentInputValue = undefined;
       this.virtualScroll.scrollToIndex(this.comments.length, 'smooth');
     }
+  }
+  ngOnDestroy(): void {
+    this.commentService.leaveRoom('chat' + this.roomNom);
   }
 }

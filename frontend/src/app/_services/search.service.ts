@@ -12,7 +12,7 @@ export class SearchService {
   }
   // tslint:disable-next-line:typedef
   sendPotentialListener(data) {
-      return this.http.post(`${environment.apiUrl}/webinarguest/`, data, this.HttpOptions).pipe(
+      return this.http.post(`${environment.apiUrl}/webinar/`, data, this.HttpOptions).pipe(
         map(api => api));
   }
 }
