@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn,  } from 'typeorm';
 
 @Entity()
 export class RefreshToken {
@@ -8,7 +8,7 @@ export class RefreshToken {
   @Column()
   email: string;
 
-  @Column()
+  @Column({ type: 'longtext'})
   token: string;
 
 }

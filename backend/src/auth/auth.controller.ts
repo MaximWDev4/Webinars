@@ -26,6 +26,7 @@ export class AuthController {
       const response = await this.authService.validateLogin(login.email, login.password);
       return new ResponseSuccess("LOGIN.SUCCESS", response);
     } catch(error) {
+      console.log(error);
       return new ResponseError("LOGIN.ERROR", error);
     }
   }
@@ -45,7 +46,7 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   async register(@Body() createUserDto: CreateUserDto): Promise<IResponse> {
     try {
-      this.userService.createNewUser(createUserDto).then(async (newUser: User) => {
+      return this.userService.createNewUser(createUserDto).then(async (newUser: User) => {
 
         const sent = await this.authService.createEmailVer(newUser.email).then(async () => {
           return await this.authService.sendEmailVerification(newUser.email).catch((e) => {throw e});

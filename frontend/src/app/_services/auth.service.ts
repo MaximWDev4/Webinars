@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import {catchError, map, mapTo, tap} from 'rxjs/operators';
-
+import jwt_decode from 'jwt-decode';
 import { environment } from '../../environments/environment';
 import { User } from '../_models/user';
 import { Tokens } from '../_models/tokens';
@@ -25,10 +25,10 @@ export class AuthService {
       .pipe(
         tap(data => {
           if (data.success) {
-            this.storeuserName(data.email);
-            this.storeLicence(data.license);
-            this.storeJwtToken(data.jwt);
-            this.storeRefreshToken(data.refreshToken);
+            this.storeuserName(data.data.user.email);
+            this.storeLicence(data.data.user.licence);
+            this.storeJwtToken(data.data.token.access_token);
+            this.storeRefreshToken(data.data.refreshToken);
           }
         }),
       );
@@ -36,7 +36,7 @@ export class AuthService {
 
   registerUser(regData: any): any {
     return this.http.post<any>(`${environment.apiUrl}/auth/email/register`,
-      { userName: regData.userName.value, email: regData.email, password: regData.password.value }).pipe(
+      { userName: regData.name, email: regData.email, password: regData.password }).pipe(
       map(data => data)
     );
   }
@@ -86,23 +86,25 @@ export class AuthService {
   getJwtToken(): any {
     const jwt = localStorage.getItem(this.JWT_TOKEN);
     if (!Common.isEmpty(jwt)) {
-      const parts = jwt.split('.');
-      const jsonPayload = this.urlSafeBase64Decode(parts[1]);
-      const payload = JSON.parse(jsonPayload);
+      // const parts = jwt.split('.');
+      // const jsonPayload = this.urlSafeBase64Decode(parts[1]);
+      const payload: any = jwt_decode(jwt, {header: false});
+      console.log(payload);
+      // const payload = JSON.parse(jsonPayload);
       this.userName = payload.userName;
       this.name = payload.name;
     }
     return jwt;
   }
 
-  urlSafeBase64Decode(input: string): any {
-    const remainder = input.length % 4;
-    if (remainder) {
-      const padLength = 4 - remainder;
-      input += '='.repeat(padLength);
-    }
-    return atob(input);
-  }
+  // urlSafeBase64Decode(input: string): any {
+  //   const remainder = input.length % 4;
+  //   if (remainder) {
+  //     const padLength = 4 - remainder;
+  //     input += '='.repeat(padLength);
+  //   }
+  //   return atob(input);
+  // }
 
   getRefreshToken(): any {
     return localStorage.getItem(this.REFRESH_TOKEN);

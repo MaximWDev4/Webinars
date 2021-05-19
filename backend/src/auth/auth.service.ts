@@ -9,9 +9,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../users/user.entity';
 import { getConnection, Repository } from 'typeorm';
 import { RefreshToken } from './refreshToken.entity';
-import { options } from 'tsconfig-paths/lib/options';
-import randtoken from 'rand-token';
-import { compareElementAt } from '@nestjs/websockets/utils/compare-element.util';
+import {uid } from 'rand-token';
 
 
 @Injectable()
@@ -33,7 +31,7 @@ export class AuthService {
 
     if(isValidPass){
       const accessToken = await this.jwtService.createToken(email, userFromDb.licence);
-      const refreshToken = randtoken.uid(256);
+      const refreshToken = uid(256);
       await getConnection()
         .createQueryBuilder()
         .insert()
@@ -46,7 +44,7 @@ export class AuthService {
         .execute();
       return { token: accessToken, user: new UserDto(userFromDb)}
     } else {
-      throw new HttpException('LOGIN.ERROR', HttpStatus.UNAUTHORIZED);
+      throw new HttpException('LOGIN.ERROR.INVALID_PASSWORD', HttpStatus.UNAUTHORIZED);
     }
 
   }
@@ -181,8 +179,8 @@ export class AuthService {
         to: email, // list of receivers (separated by ,)
         subject: 'Verify Email',
         text: 'Verify Email',
-        html: 'Hi! <br><br> Thanks for your registration<br><br>'+
-          '<a href='+ config.host.url + ':' + config.host.port +'/auth/email/verify/'+ Repo.emailToken + '>Click here to activate your account</a>'  // html body
+        html: 'Здравствуйте! <br><br> Спасибо за регистрацию<br><br>'+
+          '<a href='+ config.host.url + ':' + config.host.port +'/auth/email/verify/'+ Repo.emailToken + '>Нажмите здесь для подтверждения электронной почты</a>'  // html body
       };
 
       const sent = await new Promise<boolean>(async function(resolve, reject) {

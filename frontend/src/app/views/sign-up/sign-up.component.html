@@ -1,0 +1,61 @@
+<div class="card">
+  <form  [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="card-body">
+    <div class="card-title">
+      <app-logo></app-logo>
+      <h1>Вход</h1>
+      <h2 class="text-body">Введите E-mail и пароль</h2>
+    </div>
+    <div class="form-group">
+      <input name="email" id="email"
+             type="email"
+             formControlName="email"
+             [ngClass]="{ 'is-invalid': isInvalid('email') }"
+             placeholder="E-mail" class="form-control email_login" >
+      <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      <div *ngIf="isInvalid('email')" class="invalid-feedback">
+        <div *ngIf="getErrors('email').required">E-mail является обязательным</div>
+        <div *ngIf="getErrors('email').pattern">Введённое значение не является корректным e-mail адресом</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <input name="name" id="name"
+             type="text"
+             formControlName="name"
+             [ngClass]="{ 'is-invalid': isInvalid('name') }"
+             placeholder="Имя пользователя" class="form-control email_login" >
+      <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      <div *ngIf="isInvalid('name')" class="invalid-feedback">
+        <div *ngIf="getErrors('name').required">Имя является обязательным</div>
+        <div *ngIf="getErrors('name').pattern">Имя может включать колько символы кирилицы [А-я] и латиницы [A-z]</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <input name="password" id="password"
+             type="password"
+             formControlName="password"
+             [ngClass]="{ 'is-invalid': isInvalid('password') }"
+             placeholder="Пароль" class="form-control password_login" >
+      <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      <div *ngIf="isInvalid('password')" class="invalid-feedback">
+        <div *ngIf="getErrors('password').required">Пароль является обязательным</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-lg-12">
+        <button
+          [disabled]="!(loginForm.valid) || loading"
+          type="submit"
+          class="btn btn-info w-100">
+          <img class="L1" *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+          Войти
+        </button>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <span class="text-secondary">Уже есть аккаунт?</span>
+      <a routerLink="/login" class="ml-2 text-info">Войти</a>
+    </div>
+
+  </form>
+</div>

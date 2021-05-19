@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpResponse} from '@angular/common/http';
-import {RegUser, User} from '../../_models/user';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import {RegUser} from '../../_models/user';
 import {AuthService} from '../../_services/auth.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.scss']
 })
-
-
-export class LoginComponent implements OnInit {
+export class SignUpComponent implements OnInit {
   submitted = false;
   public reguser: RegUser = {
     emailreg: '',
@@ -30,6 +27,7 @@ export class LoginComponent implements OnInit {
   ) {
   }
 
+
   ngOnInit(): void {
     if (this.authService.isLoggedIn()) {
       this.router.navigate(['/']);
@@ -40,8 +38,8 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.pattern('^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$')]],
       // input password validator
       password: ['', [Validators.required]],
-      // input remember me checkbox
-      RME: ['0']
+      // input name
+      name: ['', [Validators.required, Validators.pattern('^[a-zA-ZА-Яа-я\\s]+$')]]
     });
     this.returnUrl = this.route.snapshot.queryParams[`returnUrl`] || '/';
   }
@@ -70,10 +68,10 @@ export class LoginComponent implements OnInit {
 
     const formData = this.loginForm.value;
     this.loading = true;
-    this.authService.loginUser(formData).subscribe(
+    this.authService.registerUser(formData).subscribe(
       result => {
         if (result.success) {
-            this.router.navigate([this.returnUrl]);
+          this.router.navigate([this.returnUrl]);
         } else {
           alert(result.message);
         }

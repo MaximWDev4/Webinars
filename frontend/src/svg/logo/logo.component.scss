@@ -102,11 +102,9 @@
   div.contr{
     display: flex;
     justify-content: center;
-  }
-  @media screen and (min-width: 991px){
-    div.contr{
-      background-color: transparent;
-    }
+    height: var(--height);
+    width: var(--width);
+    background-color: transparent;
   }
   a.butn{
     position: relative;

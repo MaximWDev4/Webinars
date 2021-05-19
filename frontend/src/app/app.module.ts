@@ -14,12 +14,14 @@ import {ErrorInterceptor} from './_helpers/error.interceptor';
 import {JwtInterceptor} from './_helpers/jwt.interceptor';
 import {RoleGuardService} from './_services/licence-guars.service';
 import {SvgModule} from '../svg/svg.module';
+import {SignUpComponent} from './views/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    LoginComponent
+    LoginComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,

@@ -38,16 +38,14 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy{
     setTimeout(() => this.commentService.getMessage().subscribe(data => {
       this.comments.push({author: data.user, content: data.text});
       this.comments = [...this.comments];
+      this._scrollToBottom();
     }), 500);
   }
 
   ngAfterViewInit(): void {
     this.virtualScroll.renderedRangeStream.subscribe(range => {
-      // console.log('range', range);
-      // console.log('range2', this.virtualScroll.getRenderedRange());
-      // if (this.virtualScroll.getRenderedRange().end % 10 === 0) {
-      //   this.nextSearchPage(++this.searchPageNumber);
-      // }
+      console.log('range', range);
+      console.log('range2', this.virtualScroll.getRenderedRange());
     });
   }
 
@@ -55,12 +53,28 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy{
     if (this.commentInputValue.length > 0) {
       // this.wsService.send(WS.SEND.MESSAGE, { comment: this.commentInputValue, room: 'chat' + this.roomNom });
       this.commentService.msgToServer({text: this.commentInputValue, user: 'Maxim', room: 'chat' + this.roomNom});
-      this.comments.push({author: 'You', content: this.commentInputValue});
-      this.comments = [...this.comments];
+      // this.comments.push({author: 'You', content: this.commentInputValue});
+      // this.comments = [...this.comments];
       this.commentInputValue = undefined;
-      this.virtualScroll.scrollToIndex(this.comments.length, 'smooth');
+      this._scrollToBottom();
     }
   }
+
+  private _scrollToBottom(): void {
+    setTimeout(() => {
+      this.virtualScroll.scrollTo({
+        bottom: 0,
+        behavior: 'smooth',
+      });
+    }, 0);
+    setTimeout(() => {
+      this.virtualScroll.scrollTo({
+        bottom: 0,
+        behavior: 'smooth',
+      });
+    }, 50);
+  }
+
   ngOnDestroy(): void {
     this.commentService.leaveRoom('chat' + this.roomNom);
   }
