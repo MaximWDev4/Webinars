@@ -4,3 +4,20 @@
 .actions>div {
   height: 100%;
 }
+
+.expandable-v {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s ease-out;
+  &.expand{
+    &__1000 {
+      max-height: 1000px;
+    }
+    &__500 {
+      max-height: 500px;
+    }
+    &__300 {
+      max-height: 300px;
+    }
+  }
+}

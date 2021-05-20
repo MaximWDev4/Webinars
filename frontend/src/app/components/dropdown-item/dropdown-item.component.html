@@ -1,0 +1,10 @@
+
+<div class="container">
+  <div class="row p-3" style="cursor: pointer;" (click)="isCollapsed = !isCollapsed">
+    <span class="collapse-icon mr-2" [ngClass]="{'expand': isCollapsed, 'collapse': !isCollapsed}"></span>
+    <span class="collapse-title" [innerHTML]="header"></span>
+  </div>
+  <div class="collapse-text expandable-v" [ngClass]="{'expand__500': isCollapsed }">
+    <div class="collapse-text-inner" [innerHTML]="body"></div>
+  </div>
+</div>

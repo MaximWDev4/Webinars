@@ -13,19 +13,21 @@ import {FormModule} from '../../components/form/form.module';
 import {SpikerModule} from '../../components/spiker/spiker.module';
 import {ProfitModule} from '../../components/profit/profit.module';
 import {ProgrammModule} from '../../components/programm/programm.module';
+import {DropdownItemModule} from '../../components/dropdown-item/dropdown-item.module';
 
 @NgModule({
-   imports: [
-     CommonModule,
-     SliderModule,
-     NavbarModule,
-     SpikerModule,
-     FormModule,
-     ProfitModule,
-     ProgrammModule,
-     HttpClientModule,
-     HomePageRoutingModule
-   ],
+  imports: [
+    CommonModule,
+    SliderModule,
+    NavbarModule,
+    SpikerModule,
+    FormModule,
+    ProfitModule,
+    ProgrammModule,
+    HttpClientModule,
+    HomePageRoutingModule,
+    DropdownItemModule
+  ],
    declarations: [
      HomePageComponent,
    ],

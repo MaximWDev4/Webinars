@@ -1,15 +1,12 @@
-FROM node:12-alpine
+# stage 1
 
-# Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+FROM node:alpine AS frontend-build
+WORKDIR /app
+COPY . .
+RUN npm ci && npm run build --prod
 
-# Install app dependencies
-COPY package.json /usr/src/app
-RUN npm install
+# stage 2
 
-# Bundle app source
-COPY . /usr/src/app
-
-EXPOSE 4200
-CMD ["npm", "start"]
+FROM nginx:alpine
+COPY --from=frontend-build /app/dist/app-to-run-inside-docker /usr/share/nginx/html
+EXPOSE 80

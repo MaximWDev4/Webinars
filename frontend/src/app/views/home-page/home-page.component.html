@@ -7,10 +7,12 @@
   >Content{{webinar.name}}<
 </p>
 
-<app-spiker [spiker]="spikier"></app-spiker>
+<app-spiker [spikier]="spikier" [spikierText]="spikierText"></app-spiker>
 
 <!--<app-profit></app-profit>-->
 
-<app-programm [steps]="program"></app-programm>
+<!--<app-programm [steps]="program"></app-programm>-->
+
+<app-dropdown-item [header]="pro.header" [body]="pro.body" *ngFor="let pro of pros"></app-dropdown-item>
 
 <app-form id="3" style="height: 100vh" [email]="true" [name]="true"></app-form>

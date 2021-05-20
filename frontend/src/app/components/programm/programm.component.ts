@@ -8,7 +8,7 @@ import {Event, Point, Line, TimelineProperties, TimelineSegment} from 'ngx-timel
 })
 export class ProgrammComponent implements OnInit {
 
-  @Input() steps: any[] = [];
+  @Input() steps: { title: string, text: string }[] = [];
   timelineThickness: string;
   startpoint: Point;
   endpoint: Point;
@@ -34,25 +34,36 @@ export class ProgrammComponent implements OnInit {
 
   ngxTimelineSegmentsInit(): void {
     // The constructor is left empty, creating a default TimelineSegment
-    const timelineSegments: TimelineSegment[] = [
-      new TimelineSegment(
-        new TimelineProperties('#d4ddd6', '150px'),
-        new Point('15vw', '#d4ddd600', '50%'),
-        new Event('#000000', '1rem', 'left', 'Сарос отражает радиант. Полнолуние меняет математический горизонт. Полнолуние дает космический Каллисто. Декретное время пространственно оценивает непреложный космический мусор – это скорее индикатор, чем примета.!'),
-        new Line('dashed', '#d4ddd6', '5px')),
-      new TimelineSegment(
-        new TimelineProperties('#d4ddd6', '150px'),
-        new Point('15vw', '#d4ddd600', '50%'),
-        new Event('#000000', '1rem', 'right', 'Математический горизонт, оценивая блеск освещенного металического шарика, перечеркивает космический космический мусор. Маятник Фуко, на первый взгляд, вращает Юпитер. Различное расположение, по определению, непрерывно. Магнитное поле, оценивая блеск освещенного металического шарика, притягивает pадиотелескоп Максвелла.'),
-        new Line('dashed', '#d4ddd6', '5px')),
-      new TimelineSegment(
-        new TimelineProperties('#d4ddd6', '150px'),
-        new Point('15vw', '#d4ddd600', '50%'),
-        new Event('#000000', '1rem', 'left', 'Восход точно дает межпланетный параметр. Планета, после осторожного анализа, гасит межпланетный афелий . Угловое расстояние, по определению, непрерывно. Тукан, по определению, недоступно отражает межпланетный годовой параллакс.'),
-        new Line('dashed', '#d4ddd6', '5px'))];
+    const timelineSegments: TimelineSegment[] = [];
+    this.steps.forEach( (step, index) => {
+      timelineSegments.push(
+        new TimelineSegment(
+          new TimelineProperties('#d4ddd6', '150px'),
+          new Point('15vw', '#d4ddd600', '50%'),
+          new Event('#000000', '1rem', index % 2 === 0 ? 'left' : 'right', step.text),
+          new Line('dashed', '#d4ddd6', '5px')
+        ),
+      ); });
+    // const timelineSegments: TimelineSegment[] = [
+    //   new TimelineSegment(
+    //     new TimelineProperties('#d4ddd6', '150px'),
+    //     new Point('15vw', '#d4ddd600', '50%'),
+    //     new Event('#000000', '1rem', 'left', 'Сарос отражает радиант. Полнолуние меняет математический горизонт. Полнолуние дает космический Каллисто. Декретное время пространственно оценивает непреложный космический мусор – это скорее индикатор, чем примета.!'),
+    //     new Line('dashed', '#d4ddd6', '5px')),
+    //   new TimelineSegment(
+    //     new TimelineProperties('#d4ddd6', '150px'),
+    //     new Point('15vw', '#d4ddd600', '50%'),
+    //     new Event('#000000', '1rem', 'right', 'Математический горизонт, оценивая блеск освещенного металического шарика, перечеркивает космический космический мусор. Маятник Фуко, на первый взгляд, вращает Юпитер. Различное расположение, по определению, непрерывно. Магнитное поле, оценивая блеск освещенного металического шарика, притягивает pадиотелескоп Максвелла.'),
+    //     new Line('dashed', '#d4ddd6', '5px')),
+    //   new TimelineSegment(
+    //     new TimelineProperties('#d4ddd6', '150px'),
+    //     new Point('15vw', '#d4ddd600', '50%'),
+    //     new Event('#000000', '1rem', 'left', 'Восход точно дает межпланетный параметр. Планета, после осторожного анализа, гасит межпланетный афелий . Угловое расстояние, по определению, непрерывно. Тукан, по определению, недоступно отражает межпланетный годовой параллакс.'),
+    //     new Line('dashed', '#d4ddd6', '5px'))];
     timelineSegments.forEach((timelineSegment) => {
       this.timelineSegments.push(timelineSegment);
     });
+    console.log(this.timelineSegments);
   }
   addEvent(): void {
     const timelineSegment: TimelineSegment = new TimelineSegment();

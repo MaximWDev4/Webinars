@@ -21,7 +21,7 @@ import {SignUpComponent} from './views/sign-up/sign-up.component';
     AppComponent,
     PageNotFoundComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,

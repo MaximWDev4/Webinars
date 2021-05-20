@@ -1,0 +1,68 @@
+
+.expandable-v {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s ease-out;
+  &.expand{
+    &__1000 {
+      max-height: 1000px;
+    }
+    &__500 {
+      max-height: 500px;
+    }
+    &__300 {
+      max-height: 300px;
+    }
+  }
+}
+
+.collapse-icon {
+  display: block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  &:before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    left: 0;
+    top: 9px;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    left: 0;
+    top: 9px;
+  }
+  &.collapse {
+    &:before {
+      background: #000;
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+      transition: all .4s ease-in-out;
+    }
+    &:after {
+      background: #000;
+      -ms-transform: rotate(0);
+      transform: rotate(0);
+      transition: all .4s ease-in-out;
+    }
+  }
+  &.expand{
+    &:before {
+      background: #000;
+      -ms-transform: rotate(360deg);
+      transform: rotate(360deg);
+      transition: all .4s ease-in-out;
+    }
+    &:after {
+      background: #000;
+      -ms-transform: rotate(360deg);
+      transform: rotate(360deg);
+      transition: all .4s ease-in-out;
+    }
+  }
+}

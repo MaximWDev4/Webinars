@@ -8,7 +8,7 @@ import { Global } from '../../_models/global';
 })
 export class NavbarComponent implements OnInit {
 
-  @Input() elements: {name: string, href: string}[] = [];
+  @Input() elements: {name: string, routerLink: string}[] = [];
   pushed: boolean = false;
 
   constructor(public global: Global) { }

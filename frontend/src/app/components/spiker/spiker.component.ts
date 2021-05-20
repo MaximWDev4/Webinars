@@ -6,7 +6,8 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./spiker.component.scss']
 })
 export class SpikerComponent implements OnInit {
-  @Input() spiker: string;
+  @Input() spikier: string;
+  @Input() spikierText: string;
 
   constructor() {
   }

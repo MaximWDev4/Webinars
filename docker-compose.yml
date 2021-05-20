@@ -1,7 +1,7 @@
 version: '3.7'
-# all the containers have to declare inside services
+# all the containers
 services:
-  # App service
+  # App backend service
   backend:
     # application rely on redis running
     depends_on:
@@ -13,7 +13,7 @@ services:
     # image name
     image: nest-ts
     # container name
-    container_name: eventmanagers
+    container_name: eventmanagers-backend
     # always restart the container if it stops.
     restart: always
     # docker run -t is allow
@@ -35,7 +35,7 @@ services:
       - /usr/src/app/node_modules
       # application network, each container for a service joins this network
     networks:
-      - nest-chat-network
+      - event-manager-network
   # Redis service
   redis:
     # image name
@@ -65,7 +65,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: eventmanagers
+    container_name: eventmanagers-frontend
     network_mode: host
   #Docker Networks
 networks:
