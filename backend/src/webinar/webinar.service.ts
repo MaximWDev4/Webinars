@@ -14,13 +14,17 @@ export class WebinarService {
     return await this.webinarRepo.find();
   }
 
-  async getWebinarById(webinarId: string) {
-    return await getConnection()
-      .createQueryBuilder()
-      .select("webinar")
-      .from(Webinar, "webinar")
-      .where("webinar.id = :id", { id: webinarId })
-      .getOne();
+  async getWebinarById(webinarId: number) {
+    try {
+      return await getConnection()
+        .createQueryBuilder()
+        .select("webinar")
+        .from(Webinar, "webinar")
+        .where("webinar.id = :id", { id: webinarId })
+        .getOne();
+    } catch (e) {
+      throw new HttpException('WEBINAR_FIND_BY_ID.UNKNOWN_ERROR', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   async createNewWebinar(body: { name: string; url: string; chatroomId: number }) {
@@ -34,7 +38,7 @@ export class WebinarService {
           ])
           .execute();
     } else {
-      throw new HttpException('WEBINAR.MISSING_MANDATORY_PARAMETERS', HttpStatus.FORBIDDEN);
+      throw new HttpException('WEBINAR_CREATE.MISSING_MANDATORY_PARAMETERS', HttpStatus.FORBIDDEN);
     }
   }
 
@@ -51,11 +55,30 @@ export class WebinarService {
         .where('id = :id', { id: body.id })
         .execute();
     } else {
-      throw new HttpException('WEBINAR.MISSING_MANDATORY_PARAMETERS', HttpStatus.FORBIDDEN);
+      throw new HttpException('WEBINAR_CHANGE.MISSING_MANDATORY_PARAMETERS', HttpStatus.FORBIDDEN);
     }
   }
 
+
+
   private isValidData(body: { name: string; url: string; chatroomId: number }) {
     return body.name &&  body.url && body.chatroomId;
+  }
+
+  async deleteWebinarById( id: number ) {
+    if (id) {
+      if (await this.getWebinarById(id)) {
+        await getConnection()
+          .createQueryBuilder()
+          .from(Webinar, 'webinar')
+          .delete()
+          .where('id = :id', { id: id })
+          .execute();
+      } else {
+        throw new HttpException('WEBINAR_DELETE.NO_DATA_AT_INDEX', HttpStatus.NOT_FOUND);
+      }
+    } else {
+      throw new HttpException('WEBINAR_DELETE.MISSING_MANDATORY_PARAMETERS', HttpStatus.FORBIDDEN);
+    }
   }
 }

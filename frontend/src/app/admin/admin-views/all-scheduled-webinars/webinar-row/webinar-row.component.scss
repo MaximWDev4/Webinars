@@ -5,6 +5,10 @@
   height: 100%;
 }
 
+.deleted {
+  background-color: rgba(248, 151, 151, 0.73);
+}
+
 .expandable-v {
   max-height: 0;
   overflow: hidden;

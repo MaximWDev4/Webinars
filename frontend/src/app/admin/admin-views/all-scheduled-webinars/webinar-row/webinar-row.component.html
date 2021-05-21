@@ -1,21 +1,21 @@
-<div class="row mesh" [ngClass]="{'highlight': odd, 'rounded': last}" *ngIf="!!webinar && !expand">
+<div class="row mesh" [ngClass]="{'highlight': odd, 'rounded': last, 'deleted': deleted}" *ngIf="!!webinar && !expand">
   <div class="col-2 p-3">{{webinar.id}}</div>
   <div class="col-3 p-3">{{webinar.name}}</div>
-  <div class="col-2 p-3">{{webinar.time}}</div>
+  <div class="col-2 p-3">{{webinar.roomId}}</div>
   <div class="col-3 p-3"><a href="https://www.youtube.com/watch?v={{webinar.url}}" class="d-flex justify-content-center">
     <img src="https://img.youtube.com/vi/{{webinar.url}}/0.jpg" alt="{{webinar.url}}" width="180" height="150"></a>
   </div>
   <div class="actions col-2">
     <div class="d-flex justify-content-center align-items-center">
       <a class="edit pl-1 pr-1" placement="top"  ngbTooltip="Редактировать" (click)="edit()"><app-edit [color]="'#4c5b72'" style="width: 40px; height: 40px"></app-edit></a>
-      <a class="delete pl-1 pr-1" placement="top"  ngbTooltip="Удалить" (click)="delete()"><app-delete [color]="'red'"></app-delete></a>
+      <a class="delete pl-1 pr-1" placement="top"  ngbTooltip="Удалить" (click)="askIfDelete()"><app-delete [color]="'red'"></app-delete></a>
     </div>
   </div>
 </div>
-<div class="record row mesh" [formGroup]="form" [ngClass]="{'highlight': odd, 'rounded': last}" *ngIf="!!webinar && expand">
+<div class="record row mesh" [formGroup]="form" [ngClass]="{'highlight': odd, 'rounded': last, 'deleted': deleted}" *ngIf="!!webinar && expand">
   <div class="col-2 p-3">{{webinar.id}}</div>
   <div class="col-3 p-3"><input class="form-control mt-1" formControlName="name"></div>
-  <div class="col-2 p-3"><input class="form-control mt-1" formControlName="time"></div>
+  <div class="col-2 p-3"><input class="form-control mt-1" formControlName="roomId"></div>
   <div class="col-3 p-3"><input class="form-control mt-1" formControlName="url"></div>
 
   <div class="actions col-2">
@@ -29,7 +29,7 @@
       </a>
       <a class="delete pl-1 pr-1"
          placement="top"  ngbTooltip="Удалить"
-         (click)="delete()"><app-delete [color]="'red'"></app-delete></a>
+         (click)="askIfDelete()"><app-delete [color]="'red'"></app-delete></a>
     </div>
   </div>
 </div>

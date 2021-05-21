@@ -58,14 +58,15 @@ services:
       # application network, each container for a service joins this network
     networks:
       - event-manager-network
-  frontend:
+  web:
     depends_on:
-      - server
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: eventmanagers-frontend
-    network_mode: host
+      - backend
+    build: angular
+    ports:
+      - 4200:4200
+    volumes:
+      - ./angular:/project
+      - /project/node_modules
   #Docker Networks
 networks:
   # All container connect in a network

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {WebinarService} from '../../../_services/webinar.service';
 
 @Component({
   selector: 'app-all-scheduled-webinars',
@@ -21,14 +22,15 @@ export class AllScheduledWebinarsComponent implements OnInit {
     }
   ];
   deleted: boolean;
-  constructor() { }
+  constructor(private webinarService: WebinarService) { }
 
   ngOnInit(): void {
+    this.getWebinars();
   }
 
-  edit(): any {
-  }
-
-  delete(): any {
+  getWebinars(): void {
+    this.webinarService.getAllWebinars().subscribe((api) => {
+      this.scheduledWebinars = api.data;
+    });
   }
 }

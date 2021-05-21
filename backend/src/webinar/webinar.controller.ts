@@ -16,7 +16,7 @@ export class WebinarController {
 
   }
   @Get('byId')
-  async getWebinarById(@Query() id: string) {
+  async getWebinarById(@Query() id: number) {
     try {
       const data = await this.webinarService.getWebinarById(id);
       return new ResponseSuccess('WEBINAR.BY_ID_SUCCESS', data)
@@ -43,4 +43,15 @@ export class WebinarController {
      return new ResponseError( 'WEBINAR.CHANGE_ERROR', e)
     }
   }
+
+  @Post('delete')
+  async deleteWebinar(@Body() body: {id: number,}) {
+    try {
+      await this.webinarService.deleteWebinarById(body.id);
+      return new ResponseSuccess('WEBINAR.DELETE_SUCCESS')
+    } catch (e) {
+      return new ResponseError( 'WEBINAR.DELETE_ERROR', e)
+    }
+  }
+
 }

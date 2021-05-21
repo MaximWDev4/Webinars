@@ -12,6 +12,7 @@ import {WebinarRowComponent} from './admin-views/all-scheduled-webinars/webinar-
 import {UsersComponent} from './admin-views/users/users.component';
 import {UserRowComponent} from './admin-views/users/user-row/user-row.component';
 import {NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
+import {WebinarService} from '../_services/webinar.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import {NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
     NgbTooltipModule
   ],
   exports: [],
-  providers: []
+  providers: [WebinarService]
 })
 export class AdminModule {
 

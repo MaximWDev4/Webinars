@@ -15,6 +15,7 @@ import {JwtInterceptor} from './_helpers/jwt.interceptor';
 import {RoleGuardService} from './_services/licence-guars.service';
 import {SvgModule} from '../svg/svg.module';
 import {SignUpComponent} from './views/sign-up/sign-up.component';
+import { ModalContentComponent } from './components/modal-content/modal-content.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {SignUpComponent} from './views/sign-up/sign-up.component';
     PageNotFoundComponent,
     LoginComponent,
     SignUpComponent,
+    ModalContentComponent,
   ],
   imports: [
     BrowserModule,
