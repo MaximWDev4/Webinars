@@ -179,8 +179,8 @@ export class AuthService {
         to: email, // list of receivers (separated by ,)
         subject: 'Verify Email',
         text: 'Verify Email',
-        html: 'Здравствуйте! <br><br> Спасибо за регистрацию<br><br>'+
-          '<a href='+ config.host.url + ':' + config.host.port +'/auth/email/verify/'+ Repo.emailToken + '>Нажмите здесь для подтверждения электронной почты</a>'  // html body
+        html: 'Здравствуйте! <br><br> Спасибо за регистрацию<br><br> Ваш код для подтверждения пароля <br>' +
+          Repo.emailToken  // html body
       };
 
       const sent = await new Promise<boolean>(async function(resolve, reject) {

@@ -1,5 +1,4 @@
 version: '3.7'
-# all the containers
 services:
   # App backend service
   backend:
@@ -20,15 +19,15 @@ services:
     tty: true
     # application port, this is take value from env file
     ports:
-      - "${SERVER_PORT}:${SERVER_PORT}"
+      - "50051:50051"
     # working directory
     working_dir: /var/www/nest-chat-realtime
     # application environment
     environment:
       SERVICE_NAME: eventmanagers
       SERVICE_TAGS: dev
-      REDIS_PORT: ${REDIS_PORT}
-      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: 6379
+      REDIS_HOST: redis
     # save (persist) data and also to share data between containers
     volumes:
       - ./:/usr/src/app
@@ -55,7 +54,7 @@ services:
       - red_data:/var/lib/redis
     # redis port, this is take value from env file
     ports:
-      - '${REDIS_PORT}:${REDIS_PORT}'
+      - '6379:6379'
       # application network, each container for a service joins this network
     networks:
       - event-manager-network
