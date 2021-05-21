@@ -19,9 +19,10 @@ export class MessageGateway implements OnGatewayInit, OnGatewayConnection, OnGat
   private logger: Logger = new Logger('MessageGateway');
 
   @SubscribeMessage('msgToServer')
-  public handleMessage(client: Socket, payload: any): Promise<WsResponse<any>> {
-    this.logger.log(payload.text);
-    return this.server.to(payload.room).emit('msgToClient', {user: payload.user, text: payload.text});
+  public handleMessage(client: Socket, payload: {text: string, user: string, room: string}): Promise<WsResponse<any>> {
+    if (payload.text.length > 0) {
+      return this.server.to(payload.room).emit('msgToClient', { user: payload.user, text: payload.text });
+    }
   }
 
   @SubscribeMessage('joinRoom')
