@@ -35,6 +35,15 @@ services:
       # application network, each container for a service joins this network
     networks:
       - event-manager-network
+#  frontend:
+#    depends_on:
+#      - backend
+#    build: frontend
+#    ports:
+#      - 4200:4200
+#    volumes:
+#      - ./angular:/frontend
+#      - /project/node_modules
   # Redis service
   redis:
     # image name
@@ -43,11 +52,11 @@ services:
     container_name: redis
     # execute the command once start redis container
     command: [
-        "redis-server",
-        "--bind",
-        "redis",
-        "--port",
-        "6379"
+          "redis-server",
+          "--bind",
+          "redis",
+          "--port",
+          "6379"
     ]
     # save (persist) data and also to share data between containers
     volumes:
@@ -58,15 +67,6 @@ services:
       # application network, each container for a service joins this network
     networks:
       - event-manager-network
-  web:
-    depends_on:
-      - backend
-    build: angular
-    ports:
-      - 4200:4200
-    volumes:
-      - ./angular:/project
-      - /project/node_modules
   #Docker Networks
 networks:
   # All container connect in a network
