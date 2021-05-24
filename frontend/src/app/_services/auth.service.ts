@@ -41,6 +41,12 @@ export class AuthService {
     );
   }
 
+  conformEmail(token): any {
+    return this.http.get<any>(`${environment.apiUrl}/email/verify/${token}`, ).pipe(
+      map(data => data)
+    );
+  }
+
   resetPassword(regData: any): any {
     return this.http.post<any>(`${environment.apiUrl}/auth/password-reset`,
       { userName: regData.userName.value}).pipe(

@@ -179,7 +179,7 @@ export class AuthService {
         to: email, // list of receivers (separated by ,)
         subject: 'Verify Email',
         text: 'Verify Email',
-        html: 'Здравствуйте! <br><br> Спасибо за регистрацию<br><br> Ваш код для подтверждения пароля <br>' +
+        html: 'Здравствуйте! <br><br> Спасибо за регистрацию<br><br> Ваш код для подтверждения еслектронной почты: <br>' +
           Repo.emailToken  // html body
       };
 

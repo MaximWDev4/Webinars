@@ -6,7 +6,6 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "compile": ".\\node_modules\\protoc\\protoc\\bin\\protoc --plugin=protoc-gen-ts=.\\node_modules\\.bin\\protoc-gen-ts.cmd --js_out=import_style=commonjs,binary:src\\app\\proto --ts_out=service=true:src\\app\\proto -I ..\\Node-ts\\src\\proto ..\\Node-ts\\src\\proto\\*.proto",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -25,7 +24,6 @@
     "@angular/router": "~11.2.13",
     "@ng-bootstrap/ng-bootstrap": "^8.0.4",
     "bootstrap": "^4.5.0",
-    "google-protobuf": "^3.15.8",
     "jwt-decode": "^3.1.2",
     "ngx-mask": "^9.1.2",
     "ngx-socket-io": "^3.2.0",
@@ -33,7 +31,6 @@
     "ngx-youtube-player": "^9.1.0",
     "protoc": "^1.0.4",
     "rxjs": "~6.5.5",
-    "ts-protoc-gen": "^0.14.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },

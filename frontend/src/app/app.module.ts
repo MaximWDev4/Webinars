@@ -16,6 +16,7 @@ import {RoleGuardService} from './_services/licence-guars.service';
 import {SvgModule} from '../svg/svg.module';
 import {SignUpComponent} from './views/sign-up/sign-up.component';
 import { ModalContentComponent } from './components/modal-content/modal-content.component';
+import { ConformEmailComponent } from './views/conform-email/conform-email.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ModalContentComponent } from './components/modal-content/modal-content.
     LoginComponent,
     SignUpComponent,
     ModalContentComponent,
+    ConformEmailComponent,
   ],
   imports: [
     BrowserModule,
