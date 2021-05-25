@@ -14,6 +14,7 @@ import { RefreshToken } from './refreshToken.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([User, EmailVerification, RefreshToken])],
   controllers: [AuthController],
+  exports: [AuthService],
   providers: [AuthService, UsersService, JWTService, JwtStrategy],
 })
 export class AuthModule implements NestModule {

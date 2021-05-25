@@ -7,7 +7,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {LoginComponent} from './views/login/login.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {AuthGuard} from './_helpers/auth.guard';
 import {ErrorInterceptor} from './_helpers/error.interceptor';
@@ -27,14 +27,15 @@ import { ConformEmailComponent } from './views/conform-email/conform-email.compo
     ModalContentComponent,
     ConformEmailComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    SvgModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        SvgModule,
+        FormsModule,
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

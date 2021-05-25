@@ -6,6 +6,7 @@ import {
   RoleGuardService as RoleGuard
 } from './_services/licence-guars.service';
 import {SignUpComponent} from './views/sign-up/sign-up.component';
+import {ConformEmailComponent} from './views/conform-email/conform-email.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full',  redirectTo: 'home/1'},
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'signup',
     component: SignUpComponent,
+  },
+  {
+    path: 'email-ver/:email/:returnUrl',
+    component: ConformEmailComponent
   },
   {
     path: 'admin',

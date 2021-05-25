@@ -7,6 +7,7 @@ import { getConnectionOptions } from 'typeorm';
 import { AuthModule } from './auth/auth.module';
 import { MetamorphosisModule } from '@fabio.formosa/metamorphosis-nest';
 import { ConfigModule } from '@nestjs/config';
+import { RolesGuard } from './common/role.guard';
 
 @Module({
   imports: [
@@ -25,5 +26,8 @@ import { ConfigModule } from '@nestjs/config';
     MetamorphosisModule.register({logger: true}),
     AuthModule,
   ],
+  providers: [
+    RolesGuard
+  ]
 })
 export class AppModule {}

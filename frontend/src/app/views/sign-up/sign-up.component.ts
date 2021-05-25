@@ -71,10 +71,11 @@ export class SignUpComponent implements OnInit {
     this.authService.registerUser(formData).subscribe(
       result => {
         if (result.success) {
-          this.router.navigate([this.returnUrl]);
+          this.router.navigate(['email-ver', formData.email, this.returnUrl]);
         } else {
           alert(result.message);
         }
+
         this.loading = false;
       });
   }

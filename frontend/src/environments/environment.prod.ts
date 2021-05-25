@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api.event-manager.club'
+  apiUrl: 'http://event-manager.club:50051'
 };

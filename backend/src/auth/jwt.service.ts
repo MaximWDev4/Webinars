@@ -1,5 +1,4 @@
 import * as jwt from 'jsonwebtoken';
-import randtoken from 'rand-token';
 import {default as config} from '../../config';
 import { Injectable} from '@nestjs/common';
 import { User } from '../users/user.entity';

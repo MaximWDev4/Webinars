@@ -1,9 +1,14 @@
-<div class="container">
   <div class="card">
-    <div class="header">
-
-    </div>
-    <input type="text" class="code">
-    <button class="btn btn-primary" (click)="sendCode()"></button>
+    <form  class="card-body">
+      <div class="card-title mt-4">
+        Подтверждение электронной почты
+      </div>
+      <div class="card-subtitle mt-3">
+        Вам на <b>{{email}}</b> было отправлено письмо с кодом подтверджения электронной почты
+      </div>
+      <div class="actions">
+        <input type="text" [(ngModel)]="code" class="code form-control col-12 mt-3" placeholder="Код из письма" [ngModelOptions]="{standalone: true}">
+        <button class="btn btn-info col-12 mt-3" (click)="sendCode()">Подтвердить</button>
+      </div>
+    </form>
   </div>
-</div>

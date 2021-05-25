@@ -1,9 +1,9 @@
 {
   "type": "mysql",
-  "host": "localhost",
-  "port": 33006,
-  "username": "eventadmin",
-  "password": "rK]WhJxD/S#zeY83",
+  "host": "db-mysql-nyc3-24734-do-user-9210364-0.b.db.ondigitalocean.com",
+  "port": "25060",
+  "username": "doadmin",
+  "password": "rhqw9qaav8ve23p7",
   "database": "eventmanagerclub",
   "entities": ["dist/**/*.entity.js"],
   "synchronize": true,

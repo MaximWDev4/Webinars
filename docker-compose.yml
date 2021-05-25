@@ -5,7 +5,6 @@ services:
     # application rely on redis running
     depends_on:
       - redis
-      - db
     # this build context will take the commands from Dockerfile
     build:
       context: ./backend
@@ -40,33 +39,10 @@ services:
       - backend
     build: frontend
     ports:
-      - 4200:80
+      - 80:80
     volumes:
       - ./angular:/frontend
       - /project/node_modules
-
-  db:
-    image: mysql:5.7
-    restart: always
-    environment:
-      MYSQL_DATABASE: 'eventmanagerclub'
-      # So you don't have to use root, but you can if you like
-      MYSQL_USER: 'eventadmin'
-      # You can use whatever password you like
-      MYSQL_PASSWORD: 'rK]WhJxD/S#zeY83'
-      # Password for root access
-      MYSQL_ROOT_PASSWORD: 'rK]WhJxD/S#zeY83'
-    networks:
-      - event-manager-network
-    ports:
-      # <Port exposed> : < MySQL Port running inside container>
-      - '33006:3306'
-    expose:
-      # Opens port 3306 on the container
-      - '33006'
-      # Where our data will be persisted
-    volumes:
-      - my-db:/var/lib/mysql
 
   # Redis service
   redis:
