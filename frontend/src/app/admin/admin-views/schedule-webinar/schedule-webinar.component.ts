@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {WebinarService} from '../../../_services/webinar.service';
+import {InfoService} from '../../../_services/info.service';
+import {ErrorService} from '../../../_services/error.service';
 
 @Component({
   selector: 'app-schedule-webinar',
@@ -9,7 +11,7 @@ import {WebinarService} from '../../../_services/webinar.service';
 })
 export class ScheduleWebinarComponent implements OnInit {
   form: FormGroup;
-  constructor(private webinarService: WebinarService) {
+  constructor(private webinarService: WebinarService, private info: InfoService, private error: ErrorService) {
     this.form = new FormGroup({
         roomId: new FormControl(''),
         name: new FormControl(''),
@@ -24,8 +26,14 @@ export class ScheduleWebinarComponent implements OnInit {
   submit(): void {
     this.webinarService.newWebinar({
       url: this.form.value.url,
-      roomId: this.form.value.roomId,
+      chatroomId: this.form.value.roomId,
       name: this.form.value.name
+    }).subscribe(data => {
+      if (data.success) {
+        this.info.infoChange(data.message);
+      } else {
+        this.error.errorChange(data.message);
+      }
     });
   }
 

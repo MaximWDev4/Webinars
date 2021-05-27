@@ -8,7 +8,8 @@ import {MatInputModule} from '@angular/material/input';
 import {SvgModule} from '../../../svg/svg.module';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import {CommentsService} from '../../_services/comment.service';
-const config: SocketIoConfig = { url: 'http://localhost:50051/chat', options: {} };
+import {environment} from '../../../environments/environment';
+const config: SocketIoConfig = { url: `${environment.apiUrl}/chat`, options: {} };
 
 @NgModule({
   exports: [

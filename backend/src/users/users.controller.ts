@@ -1,5 +1,6 @@
-import { Controller, Delete, Get } from '@nestjs/common';
+import { Controller, Delete, Get, SetMetadata, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { RolesGuard } from '../common/role.guard';
 
 @Controller('users')
 export class UsersController {
@@ -16,6 +17,8 @@ export class UsersController {
     await this.usersService.findOne(id);
   }
   @Delete(':id')
+  @UseGuards(RolesGuard)
+  @SetMetadata('licence', 5)
   async remove(id: string){
     await this.usersService.remove(id);
   }

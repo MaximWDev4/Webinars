@@ -17,6 +17,9 @@ import {SvgModule} from '../svg/svg.module';
 import {SignUpComponent} from './views/sign-up/sign-up.component';
 import { ModalContentComponent } from './components/modal-content/modal-content.component';
 import { ConformEmailComponent } from './views/conform-email/conform-email.component';
+import {ToastModule} from './components/toast/toast.module';
+import {ErrorService} from './_services/error.service';
+import {InfoService} from './_services/info.service';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,7 @@ import { ConformEmailComponent } from './views/conform-email/conform-email.compo
         HttpClientModule,
         SvgModule,
         FormsModule,
+        ToastModule
     ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
@@ -44,6 +48,8 @@ import { ConformEmailComponent } from './views/conform-email/conform-email.compo
     Global,
     HttpClient,
     AuthGuard,
+    ErrorService,
+    InfoService
   ],
   bootstrap: [AppComponent]
 })

@@ -7,10 +7,12 @@ import {
 import { AuthService } from './auth.service';
 import decode from 'jwt-decode';
 import jwt_decode from 'jwt-decode';
+import {InfoService} from './info.service';
 
 @Injectable()
 export class RoleGuardService implements CanActivate, CanActivateChild {
-  constructor(public auth: AuthService, public router: Router) {
+  constructor(public auth: AuthService, public router: Router,
+              private infoService: InfoService) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {    // this will be passed from the route config
@@ -22,9 +24,11 @@ export class RoleGuardService implements CanActivate, CanActivateChild {
       if (payload.licence >= expectedLicence) {
         return true;
       }
+      this.infoService.infoChange('У вас не достаточно прав для доступа к этому url');
       this.router.navigate(['login'], { queryParams: { returnUrl: state.url }});
       return false;
     }
+    this.infoService.infoChange('Для доступа к этому url необходимо войти в аккаунт');
     this.router.navigate(['login'], { queryParams: { returnUrl: state.url }});
     return false;
   }
@@ -38,9 +42,11 @@ export class RoleGuardService implements CanActivate, CanActivateChild {
       if (tokenPayload.licence > expectedLicence) {
         return true;
       }
+      this.infoService.infoChange('У вас не достаточно прав для доступа к этому url');
       this.router.navigate(['login'], { queryParams: { returnUrl: state.url }});
       return false;
     }
+    this.infoService.infoChange('Для доступа к этому url необходимо войти в аккаунт');
     this.router.navigate(['login'], { queryParams: { returnUrl: state.url }});
     return false;
   }

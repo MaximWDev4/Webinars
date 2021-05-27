@@ -4,11 +4,12 @@ import { RedisIoAdapter } from './redis.adapter';
 
 async function bootstrap() {
 
-  const app = await NestFactory.create(AppModule);
-  const whitelist = ['http://localhost:4200', 'chrome-extension://gmmkjpcadciiokjpikmkkmapphbmdjok'];
+  const app = await NestFactory.create(AppModule, { cors: true });
+  const whitelist = [true];
   app.enableCors({
     origin: function (origin, callback) {
-      if (whitelist.indexOf(origin) !== -1) {
+      if (true) {
+      // if (whitelist.indexOf(origin) !== -1) {
         console.log("allowed cors for:", origin)
         callback(null, true)
       } else {
@@ -16,7 +17,7 @@ async function bootstrap() {
         callback(new Error('Not allowed by CORS'))
       }
     },
-    allowedHeaders: 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Observe',
+    allowedHeaders: 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Observe, x-api-key',
     methods: "GET,PUT,POST,DELETE,UPDATE,OPTIONS",
     credentials: true,
   });

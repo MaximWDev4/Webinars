@@ -1,8 +1,6 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {WEBINAR_INFO} from './home-page.providers';
-import {Observable} from 'rxjs';
-import {Webinar} from '../../_models/webinar';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {AuthService} from '../../_services/auth.service';
 
 @Component({
   selector: 'app-home-page',
@@ -13,8 +11,9 @@ export class HomePageComponent implements OnInit {
   public webinar: any;
 
   constructor(
-    // @Inject(WEBINAR_INFO) readonly webinar$: Observable<Webinar>,
     private route: ActivatedRoute,
+    private authService: AuthService,
+    private router: Router
   ) {
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
@@ -61,7 +60,8 @@ export class HomePageComponent implements OnInit {
     },
     {
       name: 'Зарегистрироваться',
-      routerLink: '/signup'
+      routerLink: '/signup',
+      click: () => {}
     }
   ];
 
@@ -100,6 +100,15 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  exit(): void {
+    this.authService.logoutUser();
+    this.router.navigate(['login']);
+  }
+
+  isLoggedIn(): string {
+    return this.authService.isLoggedIn() ? 'Выход( ' + localStorage.getItem('userName') + ' )' : 'Вход';
   }
 }
 

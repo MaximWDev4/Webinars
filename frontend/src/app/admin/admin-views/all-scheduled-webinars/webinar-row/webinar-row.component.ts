@@ -4,6 +4,8 @@ import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
 import {WebinarService} from '../../../../_services/webinar.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModalContentComponent} from '../../../../components/modal-content/modal-content.component';
+import {InfoService} from '../../../../_services/info.service';
+import {ErrorService} from '../../../../_services/error.service';
 
 @Component({
   selector: 'app-webinar-row',
@@ -18,7 +20,11 @@ export class WebinarRowComponent implements OnInit {
   form: FormGroup;
   deleted: boolean;
 
-  constructor(private webinarService: WebinarService, private modalService: NgbModal) {
+  constructor(
+    private webinarService: WebinarService,
+    private modalService: NgbModal,
+    private info: InfoService,
+    private error: ErrorService) {
   }
 
   ngOnInit(): void {
@@ -43,17 +49,29 @@ export class WebinarRowComponent implements OnInit {
   }
 
   delete(): void {
-    // this.webinarService.deleteWebinar(this.webinar.id);
+    this.webinarService.deleteWebinar(this.webinar.id).subscribe(data => {
+      if (data.success) {
+        this.info.infoChange(data.message);
+      } else {
+        this.error.errorChange(data.message);
+      }
+    });
     this.deleted = true;
   }
 
   submit(): void {
-    const body: {id: number, name: string, url: string, roomId: number} = {
+    const body: {id: number, name: string, url: string, chatroomId: number} = {
       id: this.webinar.id,
       name: this.webinar.name,
-      roomId: this.webinar.roomId,
+      chatroomId: this.webinar.roomId,
       url: this.webinar.url
     };
-    this.webinarService.changeWebinar(body);
+    this.webinarService.changeWebinar(body).subscribe(data => {
+      if (data.success) {
+        this.info.infoChange(data.message);
+      } else {
+        this.error.errorChange(data.message);
+      }
+    });
   }
 }

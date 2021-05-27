@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 import { Global } from '../../_models/global';
+import {EventEmitter} from '@angular/core';
+
 
 @Component({
   selector: 'app-navbar',
@@ -9,6 +11,8 @@ import { Global } from '../../_models/global';
 export class NavbarComponent implements OnInit {
 
   @Input() elements: {name: string, routerLink: string}[] = [];
+  @Input()loginout: string;
+  @Output() linkClick = new EventEmitter();
   pushed: boolean = false;
 
   constructor(public global: Global) { }
@@ -16,4 +20,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onClick(): void {
+    this.linkClick.emit('click');
+  }
 }

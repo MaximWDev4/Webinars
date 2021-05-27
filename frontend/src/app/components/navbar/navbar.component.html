@@ -19,6 +19,9 @@
       <li class="nav-item" *ngFor="let element of elements">
         <a class="nav-link" [routerLink] ="element.routerLink" [ngStyle]="{'color': global.textColor}"> {{element.name}}</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="onClick()" [ngStyle]="{'color': global.textColor}"> {{loginout}}</a>
+      </li>
     </ul>
   </div>
 </nav>

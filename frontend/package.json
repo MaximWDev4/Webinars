@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~11.2.13",
+    "@angular/animations": "^11.2.14",
     "@angular/cdk": "^11.2.12",
     "@angular/common": "~11.2.13",
     "@angular/compiler": "~11.2.13",
@@ -28,6 +28,7 @@
     "ngx-mask": "^9.1.2",
     "ngx-socket-io": "^3.2.0",
     "ngx-timeline-vertical": "^1.0.3",
+    "ngx-toastr": "^14.0.0",
     "ngx-youtube-player": "^9.1.0",
     "protoc": "^1.0.4",
     "rxjs": "~6.5.5",

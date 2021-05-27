@@ -20,6 +20,7 @@ export class AuthService {
 
 
   loginUser(user: User): any {
+    console.log(environment.apiUrl);
     return this.http.post<any>(`${environment.apiUrl}/auth/email/login`,
       {email: user.email, password: user.password})
       .pipe(
@@ -42,7 +43,7 @@ export class AuthService {
   }
 
   conformEmail(token): any {
-    return this.http.get<any>(`${environment.apiUrl}/email/verify/${token}`, ).pipe(
+    return this.http.get<any>(`${environment.apiUrl}/auth/email/verify/${token}`, ).pipe(
       map(data => data)
     );
   }

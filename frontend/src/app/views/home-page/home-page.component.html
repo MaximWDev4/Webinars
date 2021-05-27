@@ -1,4 +1,4 @@
-<app-navbar [elements]="navBarElements"></app-navbar>
+<app-navbar [elements]="navBarElements" (linkClick)="exit()" [loginout]="isLoggedIn()"></app-navbar>
 
 <app-slider id="2" [slides]="slides" [showNavigation]="true">
 

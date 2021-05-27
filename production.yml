@@ -1,0 +1,76 @@
+version: '3.7'
+services:
+  # App backend service
+  backend:
+    # application rely on redis running
+    depends_on:
+      - redis
+    # this build context will take the commands from Dockerfile
+    # image name
+    image: jmax101/backend:latest
+    # container name
+    container_name: webinars-backend
+    # always restart the container if it stops.
+    restart: always
+    # docker run -t is allow
+    tty: true
+    # application port, this is take value from env file
+    ports:
+      - 50051:50051
+    # working directory
+    working_dir: /usr/src/app
+    # application environment
+    environment:
+      SERVICE_NAME: eventmanagers
+      SERVICE_TAGS: dev
+      REDIS_PORT: 6379
+      REDIS_HOST: redis
+    # save (persist) data and also to share data between containers
+    volumes:
+      - /usr/src/app/node_modules
+      # application network, each container for a service joins this network
+    networks:
+      - event-manager-network
+  frontend:
+    depends_on:
+      - backend
+    image: jmax101/frontend:latest
+    container_name: frontend
+    ports:
+      - 80:80
+    volumes:
+      - ./angular:/frontend
+      - /project/node_modules
+
+  # Redis service
+  redis:
+    # image name
+    image: redis:latest
+    # container name
+    container_name: redis
+    # execute the command once start redis container
+    command: [
+          "redis-server",
+          "--bind",
+          "redis",
+          "--port",
+          "6379"
+    ]
+    # save (persist) data and also to share data between containers
+    volumes:
+      - red_data:/var/lib/redis
+    # redis port, this is take value from env file
+    ports:
+      - '6379:6379'
+      # application network, each container for a service joins this network
+    networks:
+      - event-manager-network
+  #Docker Networks
+networks:
+  # All container connect in a network
+  event-manager-network:
+    driver: bridge
+# save (persist) data
+volumes:
+  red_data: {}
+  my-db:

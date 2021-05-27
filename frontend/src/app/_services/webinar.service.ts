@@ -25,17 +25,17 @@ export class WebinarService {
     return this.http.get(`${environment.apiUrl}/webinar`).pipe(map(api => api));
   }
 
-  newWebinar(data: {name: string, url: string, roomId: number}): Observable<any> {
+  newWebinar(data: {name: string, url: string, chatroomId: number}): Observable<any> {
     return this.http.post(`${environment.apiUrl}/webinar/new`, data, this.HttpOptions).pipe(
       map(api => api));
   }
 
-  changeWebinar(data: {id: number, name: string, url: string, roomId: number}): Observable<any> {
+  changeWebinar(data: {id: number, name: string, url: string, chatroomId: number}): Observable<any> {
     return this.http.post(`${environment.apiUrl}/webinar/change`, data, this.HttpOptions).pipe(
       map(api => api));
   }
   deleteWebinar(id: number): Observable<any>{
-    return this.http.post(`${environment.apiUrl}/webinar/delete`, id, this.HttpOptions).pipe(
+    return this.http.post(`${environment.apiUrl}/webinar/delete`, JSON.stringify({id}), this.HttpOptions).pipe(
       map(api => api));
   }
 }

@@ -1,11 +1,14 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, SetMetadata, UseGuards } from '@nestjs/common';
 import { WebinarService } from './webinar.service';
 import { ResponseError, ResponseSuccess } from '../common/response.dto';
+import { RolesGuard } from '../common/role.guard';
 
 @Controller('webinar')
+@UseGuards(RolesGuard)
 export class WebinarController {
   constructor(private webinarService: WebinarService) {}
   @Get()
+  @SetMetadata('licence', 5)
   async getWebinars() {
     try {
       const data = await this.webinarService.getWebinars();
@@ -16,6 +19,7 @@ export class WebinarController {
 
   }
   @Get('byId')
+  @SetMetadata('licence', 0)
   async getWebinarById(@Query() id: number) {
     try {
       const data = await this.webinarService.getWebinarById(id);
@@ -26,6 +30,7 @@ export class WebinarController {
 
   }
   @Post('new')
+  @SetMetadata('licence', 5)
   async createWebinar(@Body() body: {name: string, url: string, chatroomId: number}) {
     try {
       await this.webinarService.createNewWebinar(body);
@@ -35,6 +40,7 @@ export class WebinarController {
     }
   }
   @Post('change')
+  @SetMetadata('licence', 5)
   async changeWebinar(@Body() body: {id: number, name: string, url: string, chatroomId: number}) {
     try {
       await this.webinarService.changeWebinarById(body);
