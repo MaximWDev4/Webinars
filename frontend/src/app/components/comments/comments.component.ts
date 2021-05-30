@@ -52,7 +52,7 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy{
   liveComment(): void {
     if (this.commentInputValue.length > 0) {
       // this.wsService.send(WS.SEND.MESSAGE, { comment: this.commentInputValue, room: 'chat' + this.roomNom });
-      this.commentService.msgToServer({text: this.commentInputValue, user: 'Maxim', room: 'chat' + this.roomNom});
+      this.commentService.msgToServer({text: this.commentInputValue, user: localStorage.getItem('userName'), room: 'chat' + this.roomNom});
       // this.comments.push({author: 'You', content: this.commentInputValue});
       // this.comments = [...this.comments];
       this.commentInputValue = undefined;

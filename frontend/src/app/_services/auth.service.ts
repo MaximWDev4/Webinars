@@ -26,7 +26,7 @@ export class AuthService {
       .pipe(
         tap(data => {
           if (data.success) {
-            this.storeuserName(data.data.user.email);
+            this.storeuserName(data.data.user.userName);
             this.storeLicence(data.data.user.licence);
             this.storeJwtToken(data.data.token.access_token);
             this.storeRefreshToken(data.data.refreshToken);
