@@ -1,7 +1,7 @@
 <div class="row mesh" [ngClass]="{'highlight': odd, 'rounded': last, 'deleted': deleted}" *ngIf="!!webinar && !expand">
   <div class="col-2 p-3">{{webinar.id}}</div>
   <div class="col-3 p-3">{{webinar.name}}</div>
-  <div class="col-2 p-3">{{webinar.roomId}}</div>
+  <div class="col-2 p-3">{{webinar.chatroomId}}</div>
   <div class="col-3 p-3"><a href="https://www.youtube.com/watch?v={{webinar.url}}" class="d-flex justify-content-center">
     <img src="https://img.youtube.com/vi/{{webinar.url}}/0.jpg" alt="{{webinar.url}}" width="180" height="150"></a>
   </div>

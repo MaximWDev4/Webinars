@@ -8,6 +8,8 @@ import { AuthModule } from './auth/auth.module';
 import { MetamorphosisModule } from '@fabio.formosa/metamorphosis-nest';
 import { ConfigModule } from '@nestjs/config';
 import { RolesGuard } from './common/role.guard';
+import { InviteModule } from './invite/invite.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -24,7 +26,9 @@ import { RolesGuard } from './common/role.guard';
         }),
     }),
     MetamorphosisModule.register({logger: true}),
+    ScheduleModule.forRoot(),
     AuthModule,
+    InviteModule,
   ],
   providers: [
     RolesGuard

@@ -16,7 +16,7 @@ services:
     tty: true
     # application port, this is take value from env file
     ports:
-      - 50051:50051
+      - 80:50051
     # working directory
     working_dir: /usr/src/app
     # application environment
@@ -37,7 +37,7 @@ services:
     image: jmax101/frontend:latest
     container_name: frontend
     ports:
-      - 80:80
+      - 443:80
     volumes:
       - ./angular:/frontend
       - /project/node_modules

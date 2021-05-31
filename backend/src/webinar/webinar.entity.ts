@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Invite } from '../invite/invite.entity';
 
 @Entity()
 export class Webinar {
@@ -8,9 +9,15 @@ export class Webinar {
   @Column()
   chatroomId: number;
 
+  @Column({type: 'int'})
+  start_time: number;
+
   @Column()
   url: string;
 
   @Column()
   name: string;
+
+  @OneToMany(() => Invite, invite => invite.webinar)
+  invited: Invite[]
 }
