@@ -175,10 +175,10 @@ export class AuthService {
       });
 
       const mailOptions = {
-        from: '"Company" <' + config.mail.user + '>',
+        from: '"Lstovka\'s event school" <' + config.mail.user + '>',
         to: email, // list of receivers (separated by ,)
         subject: 'Verify Email',
-        text: 'Verify Email',
+        text: 'Подтверждение электронной почты',
         html: 'Здравствуйте! <br><br> Спасибо за регистрацию<br><br> Ваш код для подтверждения еслектронной почты: <br>' +
           + '<b>' + Repo.emailToken + '</b><br><br><br>' +
         'Чтобы его активировать перейдите по <a href="event-manager.club/email-ver/'+ email.toString() +'/home%2F1">ссылке</a>'// html body

@@ -1,0 +1,49 @@
+2021/05/31 04:23:55 [notice] 292727#292727: signal process started
+2021/06/01 04:20:17 [notice] 399802#399802: signal process started
+2021/06/01 04:20:17 [error] 399802#399802: invalid PID number "" in "/run/nginx.pid"
+2021/06/01 04:20:17 [emerg] 399803#399803: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2021/06/01 04:20:17 [emerg] 399803#399803: bind() to [::]:80 failed (98: Address already in use)
+2021/06/01 04:20:17 [emerg] 399803#399803: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2021/06/01 04:20:17 [emerg] 399803#399803: bind() to [::]:80 failed (98: Address already in use)
+2021/06/01 04:20:17 [emerg] 399803#399803: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2021/06/01 04:20:17 [emerg] 399803#399803: bind() to [::]:80 failed (98: Address already in use)
+2021/06/01 04:20:17 [emerg] 399803#399803: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2021/06/01 04:20:17 [emerg] 399803#399803: bind() to [::]:80 failed (98: Address already in use)
+2021/06/01 04:20:17 [emerg] 399803#399803: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2021/06/01 04:20:17 [emerg] 399803#399803: bind() to [::]:80 failed (98: Address already in use)
+2021/06/01 04:20:17 [emerg] 399803#399803: still could not bind()
+2021/06/01 04:20:20 [notice] 399804#399804: signal process started
+2021/06/01 04:20:20 [error] 399804#399804: invalid PID number "" in "/run/nginx.pid"
+2021/06/01 04:20:20 [emerg] 399805#399805: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2021/06/01 04:20:20 [emerg] 399805#399805: bind() to [::]:80 failed (98: Address already in use)
+2021/06/01 04:20:20 [emerg] 399805#399805: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2021/06/01 04:20:20 [emerg] 399805#399805: bind() to [::]:80 failed (98: Address already in use)
+2021/06/01 04:20:20 [emerg] 399805#399805: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2021/06/01 04:20:20 [emerg] 399805#399805: bind() to [::]:80 failed (98: Address already in use)
+2021/06/01 04:20:20 [emerg] 399805#399805: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2021/06/01 04:20:20 [emerg] 399805#399805: bind() to [::]:80 failed (98: Address already in use)
+2021/06/01 04:20:20 [emerg] 399805#399805: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2021/06/01 04:20:20 [emerg] 399805#399805: bind() to [::]:80 failed (98: Address already in use)
+2021/06/01 04:20:20 [emerg] 399805#399805: still could not bind()
+2021/06/01 04:22:21 [notice] 400064#400064: signal process started
+2021/06/01 04:22:21 [error] 400064#400064: invalid PID number "" in "/run/nginx.pid"
+2021/06/01 04:22:34 [notice] 400123#400123: signal process started
+2021/06/01 04:30:38 [notice] 400404#400404: signal process started
+2021/06/01 04:30:41 [notice] 400406#400406: signal process started
+2021/06/01 04:30:44 [notice] 400408#400408: signal process started
+2021/06/01 04:30:45 [notice] 400410#400410: signal process started
+2021/06/01 04:33:26 [crit] 400411#400411: *26 SSL_do_handshake() failed (SSL: error:141CF06C:SSL routines:tls_parse_ctos_key_share:bad key share) while SSL handshaking, client: 107.178.236.22, server: 0.0.0.0:443
+2021/06/01 04:33:44 [crit] 400411#400411: *37 SSL_do_handshake() failed (SSL: error:141CF06C:SSL routines:tls_parse_ctos_key_share:bad key share) while SSL handshaking, client: 107.178.232.228, server: 0.0.0.0:443
+2021/06/01 04:37:09 [crit] 400411#400411: *51 SSL_do_handshake() failed (SSL: error:141CF06C:SSL routines:tls_parse_ctos_key_share:bad key share) while SSL handshaking, client: 107.178.239.216, server: 0.0.0.0:443
+2021/06/01 04:44:43 [notice] 401452#401452: signal process started
+2021/06/01 07:09:11 [emerg] 407885#407885: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2021/06/01 07:09:11 [emerg] 407885#407885: bind() to [::]:80 failed (98: Address already in use)
+2021/06/01 07:09:11 [emerg] 407885#407885: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2021/06/01 07:09:11 [emerg] 407885#407885: bind() to [::]:80 failed (98: Address already in use)
+2021/06/01 07:09:11 [emerg] 407885#407885: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2021/06/01 07:09:11 [emerg] 407885#407885: bind() to [::]:80 failed (98: Address already in use)
+2021/06/01 07:09:11 [emerg] 407885#407885: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2021/06/01 07:09:11 [emerg] 407885#407885: bind() to [::]:80 failed (98: Address already in use)
+2021/06/01 07:09:11 [emerg] 407885#407885: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2021/06/01 07:09:11 [emerg] 407885#407885: bind() to [::]:80 failed (98: Address already in use)
+2021/06/01 07:09:11 [emerg] 407885#407885: still could not bind()

@@ -12,6 +12,7 @@ export class FormComponent implements OnInit {
   @Input() phone = false;
   @Input() email = false;
   @Input() name = false;
+  @Input() id;
 
   // version = VERSION.full;
   PHONE_MASK = '';
@@ -40,12 +41,10 @@ export class FormComponent implements OnInit {
   }
 
   submit(): void {
-    const form = {
-      reg_to_webinar: 1,
-      name: this.contact.controls.Name.value,
+    const form: {email: string, userName: string, webinarId: number} = {
+      webinarId: this.id,
+      userName: this.contact.controls.Name.value,
       email: this.contact.controls.Email.value,
-      // phone: this.contact.get('phone').value,
-      // company: this.contact.get('Company').value,
     };
     this.searchService.sendPotentialListener(form).subscribe((api: any) => {
       if (api.message === 'success') {

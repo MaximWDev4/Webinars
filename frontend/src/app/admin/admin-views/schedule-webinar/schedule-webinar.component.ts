@@ -13,7 +13,8 @@ export class ScheduleWebinarComponent implements OnInit {
   form: FormGroup;
   constructor(private webinarService: WebinarService, private info: InfoService, private error: ErrorService) {
     this.form = new FormGroup({
-        roomId: new FormControl(''),
+        chatroomId: new FormControl(''),
+        startTime: new FormControl('01.06.09'),
         name: new FormControl(''),
         url: new FormControl(''),
       }

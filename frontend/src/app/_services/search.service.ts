@@ -11,8 +11,8 @@ export class SearchService {
   constructor(private http: HttpClient) {
   }
   // tslint:disable-next-line:typedef
-  sendPotentialListener(data) {
-      return this.http.post(`${environment.apiUrl}/webinar/`, data, this.HttpOptions).pipe(
+  sendPotentialListener(data: {email: string, userName: string, webinarId: number}) {
+      return this.http.post(`${environment.apiUrl}/invite/new`, data, this.HttpOptions).pipe(
         map(api => api));
   }
 }

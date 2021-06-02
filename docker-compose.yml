@@ -19,7 +19,7 @@ services:
     tty: true
     # application port, this is take value from env file
     ports:
-      - 50051:50051
+      - 8888:8888
     # working directory
     working_dir: /usr/src/app
     # application environment
@@ -39,7 +39,7 @@ services:
       - backend
     build: frontend
     ports:
-      - 80:80
+      - 8080:80
     volumes:
       - ./angular:/frontend
       - /project/node_modules

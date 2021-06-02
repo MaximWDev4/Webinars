@@ -10,7 +10,7 @@ import {EventEmitter} from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  @Input() elements: {name: string, routerLink: string}[] = [];
+  @Input() elements: {name: string, routerLink: string, fragment?: string}[] = [];
   @Input()loginout: string;
   @Output() linkClick = new EventEmitter();
   pushed: boolean = false;

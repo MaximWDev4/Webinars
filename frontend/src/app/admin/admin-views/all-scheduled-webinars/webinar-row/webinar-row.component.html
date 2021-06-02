@@ -1,7 +1,8 @@
 <div class="row mesh" [ngClass]="{'highlight': odd, 'rounded': last, 'deleted': deleted}" *ngIf="!!webinar && !expand">
-  <div class="col-2 p-3">{{webinar.id}}</div>
+  <div class="col-1 p-3">{{webinar.id}}</div>
   <div class="col-3 p-3">{{webinar.name}}</div>
-  <div class="col-2 p-3">{{webinar.chatroomId}}</div>
+  <div class="col-2 p-3">{{getTime(webinar.start_time)}}</div>
+  <div class="col-1 p-3">{{webinar.chatroomId}}</div>
   <div class="col-3 p-3"><a href="https://www.youtube.com/watch?v={{webinar.url}}" class="d-flex justify-content-center">
     <img src="https://img.youtube.com/vi/{{webinar.url}}/0.jpg" alt="{{webinar.url}}" width="180" height="150"></a>
   </div>
@@ -13,9 +14,26 @@
   </div>
 </div>
 <div class="record row mesh" [formGroup]="form" [ngClass]="{'highlight': odd, 'rounded': last, 'deleted': deleted}" *ngIf="!!webinar && expand">
-  <div class="col-2 p-3">{{webinar.id}}</div>
+  <div class="col-1 p-3">{{webinar.id}}</div>
   <div class="col-3 p-3"><input class="form-control mt-1" formControlName="name"></div>
-  <div class="col-2 p-3"><input class="form-control mt-1" formControlName="roomId"></div>
+  <div class="col-2 p-3"><input formControlName="startTime"
+                                ngbDatepicker #dpStartDate="ngbDatepicker"
+                                class="form-control"
+                                readonly
+                                type="date"
+                                id="start_time"
+                                (click)="dpStartDate.toggle()"
+                                placeholder=""
+                                [autoClose]="'outside'"
+                                [displayMonths]="1"
+                                [startDate]="startDate"
+
+                                [maxDate]="maxDate"
+                                outsideDays="hidden"
+                                (dateSelect)="onDateSelection($event, dpStartDate, 'startTime')"
+                                [ngClass]="{ 'is-invalid': isInvalid('startTime') }"
+  /></div>
+  <div class="col-1 p-3"><input class="form-control mt-1" formControlName="roomId"></div>
   <div class="col-3 p-3"><input class="form-control mt-1" formControlName="url"></div>
 
   <div class="actions col-2">

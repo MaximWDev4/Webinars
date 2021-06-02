@@ -16,7 +16,7 @@ services:
     tty: true
     # application port, this is take value from env file
     ports:
-      - 80:50051
+      - 8888:8888
     # working directory
     working_dir: /usr/src/app
     # application environment
@@ -31,13 +31,16 @@ services:
       # application network, each container for a service joins this network
     networks:
       - event-manager-network
+      - proxy-net
   frontend:
     depends_on:
       - backend
     image: jmax101/frontend:latest
     container_name: frontend
+    networks:
+      - proxy-net
     ports:
-      - 443:80
+      - 8080:80
     volumes:
       - ./angular:/frontend
       - /project/node_modules
@@ -65,8 +68,21 @@ services:
       # application network, each container for a service joins this network
     networks:
       - event-manager-network
+  proxy:
+    depends_on:
+      - backend
+      - frontend
+    build: ./proxy
+    container_name: proxy
+    networks:
+      - proxy-net
+    ports:
+      - 80:80
+      - 443:443
   #Docker Networks
 networks:
+  proxy-net:
+    driver: bridge
   # All container connect in a network
   event-manager-network:
     driver: bridge

@@ -7,7 +7,7 @@ import {WebinarService} from '../../../_services/webinar.service';
   styleUrls: ['./all-scheduled-webinars.component.scss']
 })
 export class AllScheduledWebinarsComponent implements OnInit {
-  scheduledWebinars = [];
+  scheduledWebinars: { id: number, chatroomId: number, start_time: number, url: string, name: string }[] = [];
   deleted: boolean;
   constructor(private webinarService: WebinarService) { }
 

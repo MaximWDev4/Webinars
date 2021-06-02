@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {AuthService} from '../../_services/auth.service';
 
@@ -7,20 +7,23 @@ import {AuthService} from '../../_services/auth.service';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss' ],
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements OnInit, AfterViewInit {
   public webinar: any;
 
   constructor(
+    private element: ElementRef,
     private route: ActivatedRoute,
     private authService: AuthService,
     private router: Router
   ) {
+
     this.route.paramMap.subscribe(
       (params: ParamMap) => {
         console.log(params);
         const id = params.get('id');
         this.webinar = {
           id,
+          time: 1234567689,
           name: 'Name',
           url: 'url',
         };
@@ -56,7 +59,8 @@ export class HomePageComponent implements OnInit {
     },
     {
       name: 'О нас',
-      routerLink: '#2'
+      routerLink: '/home/1',
+      fragment: 'about'
     },
     {
       name: 'Зарегистрироваться',
@@ -100,6 +104,14 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  ngAfterViewInit(): void {
+    this.route.fragment.subscribe((fragment: string) => {
+      const el = this.element.nativeElement.querySelector( fragment ? '#' + fragment : '#top');
+      console.log(fragment ? '#' + fragment : '#top');
+      el.scrollIntoView();
+    });
   }
 
   exit(): void {

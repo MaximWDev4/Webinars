@@ -1,18 +1,21 @@
 <app-navbar [elements]="navBarElements" (linkClick)="exit()" [loginout]="isLoggedIn()"></app-navbar>
 
-<app-slider id="2" [slides]="slides" [showNavigation]="true">
+<app-slider id="top" [slides]="slides" [showNavigation]="true">
 
 </app-slider>
-<p *ngIf="webinar">
-  >Content{{webinar.name}}<
-</p>
 
-<app-spiker [spikier]="spikier" [spikierText]="spikierText"></app-spiker>
+
+<app-spiker id="about" [spikier]="spikier" [spikierText]="spikierText"></app-spiker>
 
 <!--<app-profit></app-profit>-->
 
 <!--<app-programm [steps]="program"></app-programm>-->
-
+<div class="container">
 <app-dropdown-item [header]="pro.header" [body]="pro.body" *ngFor="let pro of pros"></app-dropdown-item>
+</div>
 
-<app-form id="3" style="height: 100vh" [email]="true" [name]="true"></app-form>
+<p *ngIf="webinar" class="container col-6 m-auto pt-5 pr-5 pl-5 pb-0 text-uppercase text-center">
+  Бесплатный обучающий вебинар пройдет в {{webinar.time}}
+</p>
+
+<app-form id="form" style="height: 100vh" [email]="true" [name]="true" [id]="webinar.id"></app-form>

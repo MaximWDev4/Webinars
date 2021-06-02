@@ -96,7 +96,6 @@ export class AuthService {
       // const parts = jwt.split('.');
       // const jsonPayload = this.urlSafeBase64Decode(parts[1]);
       const payload: any = jwt_decode(jwt, {header: false});
-      console.log(payload);
       // const payload = JSON.parse(jsonPayload);
       this.userName = payload.userName;
       this.name = payload.name;

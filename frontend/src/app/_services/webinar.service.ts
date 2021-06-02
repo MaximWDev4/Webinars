@@ -30,7 +30,7 @@ export class WebinarService {
       map(api => api));
   }
 
-  changeWebinar(data: {id: number, name: string, url: string, chatroomId: number}): Observable<any> {
+  changeWebinar(data: {id: number, name: string, url: string, chatroomId: number, start_time: number}): Observable<any> {
     return this.http.post(`${environment.apiUrl}/webinar/change`, data, this.HttpOptions).pipe(
       map(api => api));
   }

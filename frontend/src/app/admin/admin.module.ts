@@ -11,10 +11,11 @@ import {SvgModule} from '../../svg/svg.module';
 import {WebinarRowComponent} from './admin-views/all-scheduled-webinars/webinar-row/webinar-row.component';
 import {UsersComponent} from './admin-views/users/users.component';
 import {UserRowComponent} from './admin-views/users/user-row/user-row.component';
-import {NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDatepickerModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 import {WebinarService} from '../_services/webinar.service';
 import {ErrorService} from '../_services/error.service';
 import {InfoService} from '../_services/info.service';
+import {NgbDateRuParserFormatter} from '../_helpers/ngb-date-ru-parser-formatter';
 
 @NgModule({
   declarations: [
@@ -32,10 +33,11 @@ import {InfoService} from '../_services/info.service';
     CommonModule,
     ReactiveFormsModule,
     SvgModule,
-    NgbTooltipModule
+    NgbTooltipModule,
+    NgbDatepickerModule
   ],
   exports: [],
-  providers: [WebinarService, ErrorService, InfoService]
+  providers: [WebinarService, ErrorService, InfoService, NgbDateRuParserFormatter]
 })
 export class AdminModule {
 

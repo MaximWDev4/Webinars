@@ -3,10 +3,12 @@
     Запланировать вебинар
   </h1>
   <div class="form" [formGroup]="form">
-    <label for="time" class="mt-3">Номар чат комнаты</label>
-    <input type="text" id="time" class="form-control" formControlName="roomId">
+    <label for="time" class="mt-3">Номер чат комнаты</label>
+    <input type="text" id="time" class="form-control" formControlName="chatroomId" placeholder="1/2/3...">
     <label for="name" class="mt-3">Название вебинара</label>
     <input type="text" id="name" class="form-control" formControlName="name" placeholder="Название">
+    <label for="start_time" class="mt-3">Время начала трансляции</label>
+    <input type="text" id="start_time" class="form-control" formControlName="startTime">
     <label for="url" class="mt-3">Конец ссылки на ютуб стрим или видео ( например: https://www.youtube.com/watch?v=<b>OpAHNHFfWH4</b> )</label>
     <input type="text" id="url" class="form-control" formControlName="url" placeholder="OpAHNHFfWH4">
     <input type="button" class="submit btn btn-primary mt-3" (click)="submit()" value="Запланировать">
