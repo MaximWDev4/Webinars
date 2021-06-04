@@ -8,5 +8,5 @@
     <div class="col-3 text-center p-3"><b>Ссылка на видео</b></div>
     <div class="col-1.5 text-center p-3"><b>Действия</b></div>
   </div>
-  <app-webinar-row [odd]="odd" [last]="last" [webinar]="webinar" *ngFor="let webinar of scheduledWebinars; let odd = odd; let last = last"></app-webinar-row>
+  <app-webinar-row [odd]="odd" [last]="last" [webinar]="webinar" (changeWebinar)="getWebinars()" *ngFor="let webinar of scheduledWebinars; let odd = odd; let last = last"></app-webinar-row>
 </div>

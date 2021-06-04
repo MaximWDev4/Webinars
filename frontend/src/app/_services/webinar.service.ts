@@ -14,10 +14,10 @@ export class WebinarService {
     headers: new HttpHeaders({'Content-type': 'application/json'})
   };
 
-  getWebinarByName$(id): Observable<Webinar> {
+  getWebinarById(id): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/webinar/byId?id=${id}`)
-      .pipe(map(userObj => {
-        return userObj;
+      .pipe(map(webinarObj => {
+        return webinarObj;
       }));
   }
 
@@ -25,7 +25,7 @@ export class WebinarService {
     return this.http.get(`${environment.apiUrl}/webinar`).pipe(map(api => api));
   }
 
-  newWebinar(data: {name: string, url: string, chatroomId: number}): Observable<any> {
+  newWebinar(data: {name: string, url: string, start_time: number, chatroomId: number}): Observable<any> {
     return this.http.post(`${environment.apiUrl}/webinar/new`, data, this.HttpOptions).pipe(
       map(api => api));
   }

@@ -10,6 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 import { RolesGuard } from './common/role.guard';
 import { InviteModule } from './invite/invite.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { UsersService } from './users/users.service';
 
 @Module({
   imports: [
@@ -31,7 +32,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     InviteModule,
   ],
   providers: [
-    RolesGuard
+    RolesGuard,
   ]
 })
 export class AppModule {}

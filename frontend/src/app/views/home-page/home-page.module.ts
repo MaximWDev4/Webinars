@@ -26,7 +26,7 @@ import {DropdownItemModule} from '../../components/dropdown-item/dropdown-item.m
     ProgrammModule,
     HttpClientModule,
     HomePageRoutingModule,
-    DropdownItemModule
+    DropdownItemModule,
   ],
    declarations: [
      HomePageComponent,

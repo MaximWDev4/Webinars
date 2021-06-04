@@ -3,3 +3,19 @@
 *{
   font-family: 'Montserrat', serif;
 }
+.line {
+  background-color: #7d7d7d;
+  height: 1px;
+  &:after{
+    content: '';
+    display: block;
+    position: relative;
+    top: -10px;
+    left: 50%;
+    background-color: white;
+    border: solid #7d7d7d thin;
+    width: 20px;
+    height: 20px;
+    transform: rotateZ(45deg);
+  }
+}

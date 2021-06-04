@@ -9,7 +9,7 @@ export class Webinar {
   @Column()
   chatroomId: number;
 
-  @Column({type: 'int'})
+  @Column({type: 'bigint'})
   start_time: number;
 
   @Column()

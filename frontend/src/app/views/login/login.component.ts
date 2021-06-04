@@ -4,6 +4,8 @@ import {RegUser, User} from '../../_models/user';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../_services/auth.service';
+import {ModalContentComponent} from '../../components/modal-content/modal-content.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +28,8 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService,
               private fb: FormBuilder,
               private router: Router,
-              private route: ActivatedRoute
+              private route: ActivatedRoute,
+              private modalService: NgbModal,
   ) {
   }
 
@@ -70,12 +73,12 @@ export class LoginComponent implements OnInit {
 
     const formData = this.loginForm.value;
     this.loading = true;
-    this.authService.loginUser(formData).subscribe(
-      result => {
+    this.authService.loginUser(formData).subscribe( (result) => {
         if (result.success) {
             this.router.navigate([this.returnUrl]);
         } else {
-          alert(result.message);
+          const modalRef = this.modalService.open(ModalContentComponent);
+          modalRef.componentInstance.name = 'Неверный логин или пароль';
         }
         this.loading = false;
       });

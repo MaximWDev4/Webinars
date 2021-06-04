@@ -23,7 +23,7 @@ export class Common {
     const hour = a.getHours();
     const min = a.getMinutes();
     const sec = a.getSeconds();
-    return date + ' ' + month + ' ' + year + 'г. в' + hour + ':' + min ;
+    return date + ' ' + month + ' ' + year + 'г. в ' + hour + ':' + min ;
   }
 
   static TimestampFromUTC(value: {date: NgbDate, time: {hour: number, min: number}}): number {

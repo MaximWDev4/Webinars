@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // apiUrl: 'http://api.event-manager.club'
-  apiUrl: 'http://localhost:8888'
+  apiUrl: 'https://api.event-manager.club'
+  // apiUrl: 'http://localhost:8888'
 };
 
 /*

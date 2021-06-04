@@ -1,10 +1,9 @@
 import * as bcrypt from 'bcryptjs';
-import { Get, HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {  HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { getConnection, Repository } from 'typeorm';
 import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-users.dto';
-import { UserDto } from './dto/user.dto';
 
 const saltRounds = 10;
 
@@ -62,5 +61,26 @@ export class UsersService {
       const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
     } else return false
+  }
+
+  async change(newUser: {id: number, email: string,  licence: number, userName: string}) {
+    if(this.isValidEmail(newUser.email)){
+      const userRegistered = await this.findByEmail(newUser.email);
+      if(userRegistered){
+        return  await getConnection()
+          .createQueryBuilder()
+          .update(User)
+          .set(
+            { email: newUser.email, userName: newUser.userName, licence: newUser.licence },
+          ).where('id = :id', {id: newUser.id})
+          .execute().then(async () => {
+            return await this.findByEmail(newUser.email);
+          });
+      } else {
+        throw new HttpException('USER_CHANGE.USER_NOT_EXIST', HttpStatus.NOT_FOUND);
+      }
+    } else {
+      throw new HttpException('USER_CHANGE.MISSING_MANDATORY_PARAMETERS', HttpStatus.FORBIDDEN);
+    }
   }
 }

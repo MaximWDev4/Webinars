@@ -1,5 +1,4 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { Webinars } from './webinar.mock';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Webinar } from './webinar.entity';
 import { getConnection, Repository } from 'typeorm';
@@ -15,19 +14,25 @@ export class WebinarService {
   }
 
   async getWebinarById(webinarId: number) {
+    let webinar;
     try {
-      return await getConnection()
+      webinar = await getConnection()
         .createQueryBuilder()
         .select("webinar")
         .from(Webinar, "webinar")
-        .where("webinar.id = :id", { id: webinarId })
+        .where("id = :id", { id: +webinarId })
         .getOne();
     } catch (e) {
-      throw new HttpException('WEBINAR_FIND_BY_ID.UNKNOWN_ERROR', HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+        throw new HttpException('WEBINAR_FIND_BY_ID.UNKNOWN_ERROR', HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+      if (webinar) {
+        return webinar;
+      } else {
+        throw new HttpException('Webinar not found', HttpStatus.NOT_FOUND);
+      }
   }
 
-  async createNewWebinar(body: { name: string; url: string; chatroomId: number }) {
+  async createNewWebinar(body: { name: string; url: string; start_time: number, chatroomId: number }) {
     if(this.isValidData(body)){
         await getConnection()
           .createQueryBuilder()
@@ -42,7 +47,7 @@ export class WebinarService {
     }
   }
 
-  async changeWebinarById(body: { id: number; name: string; url: string; chatroomId: number }) {
+  async changeWebinarById(body: { id: number; name: string; start_time: number; url: string; chatroomId: number }) {
     if(this.isValidData(body) && body.id){
       await getConnection()
         .createQueryBuilder()
@@ -50,6 +55,7 @@ export class WebinarService {
         .set({
           name: body.name,
           url: body.url,
+          start_time: body.start_time,
           chatroomId: body.chatroomId
         })
         .where('id = :id', { id: body.id })

@@ -1,6 +1,6 @@
 version: '3.7'
 services:
-  # App backend service
+#   App backend service
   backend:
     # application rely on redis running
     depends_on:

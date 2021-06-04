@@ -35,7 +35,7 @@ export function webinarFactory(
       console.log(param);
       const id = param.getAll('id');
 
-      return webinarService.getWebinarByName$(id);
+      return webinarService.getWebinarById(id);
     }),
   );
 }

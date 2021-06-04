@@ -1,0 +1,24 @@
+.has-error, .has-error>input, .has-error>select, .form-group.has-error label{
+
+  border-color: #f51e61;
+  color: #f51e61;
+  /*box-shadow: 0 0 0 1px rgb(169, 68, 66);*/
+}
+.has-error>input{
+  box-shadow: 0 0 0 3px rgb(245, 30, 97);
+}
+
+.has-error>.help-block {
+  color: #f51e61;
+}
+.form-control:focus:not(.is_invalid),
+.custom-select:focus:not(.is_invalid) {
+  box-shadow:  0 0 0 .2rem #00CF95;
+}
+
+input {
+  font-weight: 500;
+  border: 2px solid #edf2f6;
+  padding: 5px 15px;
+}
+

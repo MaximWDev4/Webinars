@@ -7,5 +7,5 @@
     <div class="col-3 text-center p-3"><b>Права</b></div>
     <div class="col-2 text-center p-3"><b>Действия</b></div>
   </div>
-  <app-user-row [odd]="odd" [last]="last" [user]="user" *ngFor="let user of users; let odd = odd; let last = last"></app-user-row>
+  <app-user-row [odd]="odd" [last]="last" [user]="user" (changeUser)="getAll()" *ngFor="let user of users; let odd = odd; let last = last"></app-user-row>
 </div>

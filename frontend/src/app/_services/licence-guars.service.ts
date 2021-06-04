@@ -27,6 +27,8 @@ export class RoleGuardService implements CanActivate, CanActivateChild {
       this.infoService.infoChange('У вас не достаточно прав для доступа к этому url');
       this.router.navigate(['login'], { queryParams: { returnUrl: state.url }});
       return false;
+    } else if (expectedLicence === 0 && localStorage.getItem('guest') === 'true') {
+      return true;
     }
     this.infoService.infoChange('Для доступа к этому url необходимо войти в аккаунт');
     this.router.navigate(['login'], { queryParams: { returnUrl: state.url }});

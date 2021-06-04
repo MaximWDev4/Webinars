@@ -16,6 +16,8 @@ import {WebinarService} from '../_services/webinar.service';
 import {ErrorService} from '../_services/error.service';
 import {InfoService} from '../_services/info.service';
 import {NgbDateRuParserFormatter} from '../_helpers/ngb-date-ru-parser-formatter';
+import {ToastModule} from '../components/toast/toast.module';
+import {UserService} from '../_services/user.service';
 
 @NgModule({
   declarations: [
@@ -34,10 +36,11 @@ import {NgbDateRuParserFormatter} from '../_helpers/ngb-date-ru-parser-formatter
     ReactiveFormsModule,
     SvgModule,
     NgbTooltipModule,
-    NgbDatepickerModule
+    NgbDatepickerModule,
+    ToastModule
   ],
   exports: [],
-  providers: [WebinarService, ErrorService, InfoService, NgbDateRuParserFormatter]
+  providers: [WebinarService, ErrorService, InfoService, NgbDateRuParserFormatter, UserService]
 })
 export class AdminModule {
 

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 import {expand} from 'rxjs/operators';
 import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
 import {WebinarService} from '../../../../_services/webinar.service';
@@ -8,6 +8,8 @@ import {InfoService} from '../../../../_services/info.service';
 import {ErrorService} from '../../../../_services/error.service';
 import {Common} from '../../../../_helpers/common.helper';
 import {NgbDateRuParserFormatter} from '../../../../_helpers/ngb-date-ru-parser-formatter';
+import {EventEmitter} from '@angular/core';
+import {SuccessService} from '../../../../_services/success.service';
 
 @Component({
   selector: 'app-webinar-row',
@@ -16,8 +18,10 @@ import {NgbDateRuParserFormatter} from '../../../../_helpers/ngb-date-ru-parser-
 })
 export class WebinarRowComponent implements OnInit {
   @Input() odd: boolean;
-  @Input() webinar: { id: number, chatroomId: number, start_time: number, url: string, name: string };
+  @Input() webinar: { id: number, chatroomId: number, start_time: number, url: string, name: string }
+    = {id: 0, start_time: Date.now(), chatroomId: 0, name: '', url: '' };
   @Input() last: boolean;
+  @Output() changeWebinar = new EventEmitter();
   expand: boolean;
   form: FormGroup;
   deleted: boolean;
@@ -31,6 +35,7 @@ export class WebinarRowComponent implements OnInit {
     private webinarService: WebinarService,
     private modalService: NgbModal,
     private info: InfoService,
+    private success: SuccessService,
     private error: ErrorService,
     private calendar: NgbCalendar,
     public dateFormatter: NgbDateRuParserFormatter) {
@@ -40,18 +45,14 @@ export class WebinarRowComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const jsStartDate = new Date(this.webinar.start_time);
+    const jsStartDate = new Date(+this.webinar.start_time);
     this.startDate = new NgbDate(jsStartDate.getFullYear(), jsStartDate.getMonth(), jsStartDate.getDate());
-    console.log(this.startDate);
     this.form = new FormGroup({
       name: new FormControl(this.webinar.name),
       roomId: new FormControl(this.webinar.chatroomId),
       startTime: new FormControl(this.startDate),
       // this.webinar.start_time)),
       url: new FormControl(this.webinar.url),
-    });
-    this.form.statusChanges.subscribe(() => {
-      console.log(this.f.roomId.value, Common.TimestampFromUTC({date: this.f.startTime.value, time: {hour: 0, min: 0}}));
     });
   }
 
@@ -71,7 +72,7 @@ export class WebinarRowComponent implements OnInit {
   delete(): void {
     this.webinarService.deleteWebinar(this.webinar.id).subscribe(data => {
       if (data.success) {
-        this.info.infoChange(data.message);
+        this.success.successChange('Запись удалена');
       } else {
         this.error.errorChange(data.message);
       }
@@ -79,7 +80,7 @@ export class WebinarRowComponent implements OnInit {
     this.deleted = true;
   }
 
-  submit(): void {
+  async submit(): Promise<void> {
     const body: {id: number, name: string, start_time: number, url: string, chatroomId: number} = {
       id: this.webinar.id,
       name: this.f.name.value,
@@ -87,13 +88,16 @@ export class WebinarRowComponent implements OnInit {
       start_time: Common.TimestampFromUTC({date: this.f.startTime.value, time: {hour: 0, min: 0}}),
       url: this.f.url.value
     };
-    this.webinarService.changeWebinar(body).subscribe(data => {
+    this.webinarService.changeWebinar(body).subscribe(async (data) => {
+      console.log(data);
       if (data.success) {
-        this.info.infoChange(data.message);
+        this.success.successChange('Успешно изменено');
       } else {
         this.error.errorChange(data.message);
       }
-    });
+    },
+        error => {},
+      () => this.changeWebinar.emit(this.webinar.id));
   }
 
   getTime(startTime: number): string {

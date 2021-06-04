@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 
 
 @Component({
@@ -7,6 +7,7 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
   styleUrls: ['./media-player.component.scss']
 })
 export class MediaPlayerComponent implements OnInit {
+  @Input() url: string = '9az99oQS6HM';
   event: MouseEvent;
   clientX = 0;
   player;

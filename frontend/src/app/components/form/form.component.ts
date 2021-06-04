@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SearchService} from '../../_services/search.service';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-form',
@@ -13,7 +14,7 @@ export class FormComponent implements OnInit {
   @Input() email = false;
   @Input() name = false;
   @Input() id;
-
+  @Output() submitForm = new EventEmitter();
   // version = VERSION.full;
   PHONE_MASK = '';
   contact: FormGroup = new FormGroup({hidden: new FormControl()});
@@ -21,7 +22,7 @@ export class FormComponent implements OnInit {
   modalHref: string;
   showModal = false;
 
-  constructor(private searchService: SearchService) { }
+  constructor() { }
 
   ngOnInit(): void {
     if (this.name) {
@@ -46,12 +47,8 @@ export class FormComponent implements OnInit {
       userName: this.contact.controls.Name.value,
       email: this.contact.controls.Email.value,
     };
-    this.searchService.sendPotentialListener(form).subscribe((api: any) => {
-      if (api.message === 'success') {
-        this.modalHref = api.href;
-        this.showModal = true;
-      }
-    });
+    this.submitForm.emit(form);
+    this.contact.reset();
   }
 
   close(): void {

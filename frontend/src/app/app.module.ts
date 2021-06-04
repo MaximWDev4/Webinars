@@ -20,6 +20,10 @@ import { ConformEmailComponent } from './views/conform-email/conform-email.compo
 import {ToastModule} from './components/toast/toast.module';
 import {ErrorService} from './_services/error.service';
 import {InfoService} from './_services/info.service';
+import {SuccessService} from './_services/success.service';
+import { WebinarGuestAuthComponent } from './views/webinar-guest-auth/webinar-guest-auth.component';
+import {UserService} from './_services/user.service';
+import {WebinarService} from './_services/webinar.service';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,7 @@ import {InfoService} from './_services/info.service';
     SignUpComponent,
     ModalContentComponent,
     ConformEmailComponent,
+    WebinarGuestAuthComponent,
   ],
     imports: [
         BrowserModule,
@@ -49,7 +54,10 @@ import {InfoService} from './_services/info.service';
     HttpClient,
     AuthGuard,
     ErrorService,
-    InfoService
+    InfoService,
+    SuccessService,
+    UserService,
+    WebinarService
   ],
   bootstrap: [AppComponent]
 })

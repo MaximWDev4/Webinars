@@ -20,7 +20,7 @@ export class WebinarController {
   }
   @Get('byId')
   @SetMetadata('licence', 0)
-  async getWebinarById(@Query() id: number) {
+  async getWebinarById(@Query('id') id: number) {
     try {
       const data = await this.webinarService.getWebinarById(id);
       return new ResponseSuccess('WEBINAR.BY_ID_SUCCESS', data)
@@ -31,7 +31,7 @@ export class WebinarController {
   }
   @Post('new')
   @SetMetadata('licence', 5)
-  async createWebinar(@Body() body: {name: string, url: string, chatroomId: number}) {
+  async createWebinar(@Body() body: {name: string, url: string, start_time: number, chatroomId: number}) {
     try {
       await this.webinarService.createNewWebinar(body);
       return new ResponseSuccess('WEBINAR.CREATE_SUCCESS')
@@ -41,7 +41,7 @@ export class WebinarController {
   }
   @Post('change')
   @SetMetadata('licence', 5)
-  async changeWebinar(@Body() body: {id: number, name: string, url: string, chatroomId: number}) {
+  async changeWebinar(@Body() body: {id: number, name: string, start_time: number, url: string, chatroomId: number}) {
     try {
       await this.webinarService.changeWebinarById(body);
       return new ResponseSuccess('WEBINAR.CHANGE_SUCCESS')

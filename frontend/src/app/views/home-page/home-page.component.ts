@@ -1,6 +1,11 @@
 import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {AuthService} from '../../_services/auth.service';
+import {SearchService} from '../../_services/search.service';
+import {SuccessService} from '../../_services/success.service';
+import {ErrorService} from '../../_services/error.service';
+import {WebinarService} from '../../_services/webinar.service';
+import {Common} from '../../_helpers/common.helper';
 
 @Component({
   selector: 'app-home-page',
@@ -9,26 +14,39 @@ import {AuthService} from '../../_services/auth.service';
 })
 export class HomePageComponent implements OnInit, AfterViewInit {
   public webinar: any;
+  id = 0;
 
   constructor(
     private element: ElementRef,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private router: Router
+    private searchService: SearchService,
+    private success: SuccessService,
+    private error: ErrorService,
+    private router: Router,
+    private webinarService: WebinarService
   ) {
 
-    this.route.paramMap.subscribe(
-      (params: ParamMap) => {
-        console.log(params);
-        const id = params.get('id');
+    this.route.params.subscribe(params => {
+      this.id = +params.id;
+      if (this.id !== 0) {
+        this.webinarService.getWebinarById(this.id).subscribe(body => {
+          if (body.success) {
+            this.webinar = body.data;
+          } else {
+            router.navigate(['404']);
+          }
+        },
+          e => {
+              error.errorChange('К сожалению, этого вебинара не существует.\n Перенапраыляем на главную...');
+              router.navigate(['home', '0']);
+          });
+      } else {
         this.webinar = {
-          id,
-          time: 1234567689,
-          name: 'Name',
-          url: 'url',
+          id: 0,
         };
       }
-    );
+    });
   }
   program = [
     {title: 'Урок 1', text: 'Что такое MICE?'},
@@ -53,21 +71,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   ];
   spikier = 'assets/spikier_1.jpg';
   spikierText = 'Почему я создала  школу event-менеджера?<br>- Организации мероприятий не учат в учебных заведениях, хотя - это современная, востребованная профессия. <br>- Сейчас, все больше людей и компаний доверяют профессионалам организацию своего мероприятия. <br>- Я хочу создать больше профессионалов в этом секторе  профессий! ';
-  navBarElements = [{
-      name: 'Главная',
-      routerLink: '/'
-    },
-    {
-      name: 'О нас',
-      routerLink: '/home/1',
-      fragment: 'about'
-    },
-    {
-      name: 'Зарегистрироваться',
-      routerLink: '/signup',
-      click: () => {}
-    }
-  ];
+  navBarElements = [];
 
   slides = [
     { background: 'slider-back-1.jpg',
@@ -103,6 +107,24 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   ];
 
   ngOnInit(): void {
+    this.navBarElements.push(
+    {
+      name: 'Главная',
+      routerLink: '/home/' + this.id,
+      fragment: 'top'
+    },
+    {
+      name: 'О нас',
+      routerLink: '/home/' + this.id,
+      fragment: 'about'
+    });
+    if (this.id !== 0) {
+      this.navBarElements.push({
+        name: 'Зарегистрироваться',
+        routerLink: '/home/' + this.id,
+        fragment: 'signup',
+      });
+    }
 
   }
 
@@ -121,6 +143,27 @@ export class HomePageComponent implements OnInit, AfterViewInit {
 
   isLoggedIn(): string {
     return this.authService.isLoggedIn() ? 'Выход( ' + localStorage.getItem('userName') + ' )' : 'Вход';
+  }
+
+  onSubmin(form: any): void {
+    this.searchService.sendPotentialListener(form).subscribe((api: any) => {
+      if (api.success) {
+        this.success.successChange('Вы удачно записались на вебинар');
+      } else {
+        this.error.errorChange(('Что-то пошло не так, попробуйте позже'));
+      }
+    });
+  }
+
+  getTime(startTime: number): string {
+    return Common.timeConverter(+startTime);
+  }
+
+  openWhatsappModal(): void {
+    window.open('https://wa.me/77071170179/?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%20%D0%BC%D0%BE%D0%B3%D1%83%20%D1%8F%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C%20%D0%BE%20%D0%BA%D1%83%D1%80%D1%81%D0%B5%20%20%20%D0%BF%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D0%B5%D0%B5%3F%20', '_blank');
+  }
+  openTG(): void {
+    window.open('https://t.me/event_school1', '_blank');
   }
 }
 

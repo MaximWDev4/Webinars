@@ -10,12 +10,38 @@
 <!--<app-profit></app-profit>-->
 
 <!--<app-programm [steps]="program"></app-programm>-->
+<div class="line m-5"></div>
 <div class="container">
 <app-dropdown-item [header]="pro.header" [body]="pro.body" *ngFor="let pro of pros"></app-dropdown-item>
+  <div class="line m-5"></div>
+  <div class="block-text m-3" style="text-align: center; line-height: 1.4; font-size: 1.26rem;">
+    Если вы хотите стать профессиональным организатором мероприятий, тогда начинайте прямо сейчас!<br>Если остались вопросы,  напишите мне!
+  </div>
+  <div class="text-center m-3">
+      <div class="col-12">
+        <div class="btn btn-success col-lg-3 col-md-6 col-12" (click)="openWhatsappModal()">
+            <i class="fa fab fa-fa fab fa-wh"></i>
+            <span>Напишите мне!</span>
+        </div>
+    </div>
+  </div>
+  <div class="line m-5"></div>
+  <div class="block-text has-rtl block-text" style="text-align: center; line-height: 1.4; font-size: 1.26rem;">
+    Присоединяйтесь к телеграмм каналу, здесь всегда есть что-то  интересное и  необычное. Истории с реальных мероприятий, статьи,  полезные советы.
+  </div>
+  <div class="text-center m-3">
+    <div class="row row-small">
+      <div class="col-12">
+        <div class="btn btn-info col-lg-4 col-md-7 col-12" (click)="openTG()">
+          <i class="fa fab fa-fa fab fa-tg"></i>
+          <span>Телеграмм канал "Event школа"</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<p *ngIf="webinar" class="container col-6 m-auto pt-5 pr-5 pl-5 pb-0 text-uppercase text-center">
-  Бесплатный обучающий вебинар пройдет в {{webinar.time}}
+<p id="signup" *ngIf="id != 0 ? !!webinar : false" class="container m-auto pt-5 pr-5 pl-5 pb-0 text-uppercase text-center">
+  Бесплатный обучающий вебинар "{{webinar.name}}" пройдет {{getTime(webinar.start_time)}}
 </p>
-
-<app-form id="form" style="height: 100vh" [email]="true" [name]="true" [id]="webinar.id"></app-form>
+<p *ngIf="id != 0 ? !!webinar : false" class="container m-auto pt-5 pr-5 pl-5 pb-0 text-uppercase text-center">Для регистрации на вебинар заполните форму ниже</p>
+<app-form id="form" style="height: 100vh" [email]="true" [name]="true" [id]="webinar.id" (submitForm)="onSubmin($event)" *ngIf="id != 0 ? !!webinar : false"></app-form>

@@ -19,11 +19,7 @@ export interface IMessage {
 export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy{
   @Input() roomNom = '';
   @ViewChild(CdkVirtualScrollViewport) virtualScroll: CdkVirtualScrollViewport;
-  comments = [{author: 'Mike', content: 'Здравствуйте!'},
-    {author: 'El', content: 'здрасте'}, {author: 'Mike', content: 'Привет всем'},
-    {author: 'Mike', content: 'Меня слышно?'}, {author: 'El', content: 'Да'},
-    {author: 'Mike', content: 'Начнем'}, {author: 'El', content: 'Давайте'},
-    {author: 'Mike', content: 'Съешь же ещё этих мягких французских булок да выпей чаю '}, {author: 'El', content: 'Эм...'}];
+  comments = [];
   commentInputValue: string;
   messages$: Observable<IMessage[]>;
   // private counter$: Observable<number>;

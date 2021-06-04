@@ -4,6 +4,7 @@ import {ToastComponent} from './toast.component';
 import {ToastrModule} from 'ngx-toastr';
 import {ErrorService} from '../../_services/error.service';
 import {InfoService} from '../../_services/info.service';
+import {SuccessService} from '../../_services/success.service';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import {InfoService} from '../../_services/info.service';
   ],
   providers: [
     ErrorService,
-    InfoService
+    InfoService,
+    SuccessService
   ]
 })
 
