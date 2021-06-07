@@ -125,7 +125,6 @@ export class HomePageComponent implements OnInit, AfterViewInit {
         fragment: 'signup',
       });
     }
-
   }
 
   ngAfterViewInit(): void {
